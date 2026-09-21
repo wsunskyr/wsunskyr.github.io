@@ -1,0 +1,1 @@
+.work-panel.svelte-o6epgp{animation:svelte-o6epgp-work-enter .45s ease both}.work-panel.is-open.svelte-o6epgp{border-color:color-mix(in oklch,var(--primary) 42%,var(--line-divider))}@keyframes svelte-o6epgp-work-enter{0%{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media (prefers-reduced-motion: reduce){.work-panel.svelte-o6epgp{animation:none}}

@@ -1,0 +1,2591 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>我的博客 - 记录技术、生活与灵感</title><description>记录技术、生活与灵感</description><link>https://wsunskyr.github.io/</link><language>zh_CN</language><item><title>Unity-Skills 被 DeepWiki 收录 —— 我的开源项目新里程碑</title><link>https://wsunskyr.github.io/posts/deepwiki-unityskills/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/deepwiki-unityskills/</guid><description>我的开源项目 Unity-Skills 被 DeepWiki 自动索引并生成了完整的技术文档。从个人项目到被知识平台认可，聊聊这个用 REST API 驱动 AI 操控 Unity 的自动化框架背后的故事。</description><pubDate>Tue, 10 Feb 2026 17:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;Unity-Skills × DeepWiki&lt;/h1&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/Unity-Skills&quot;}&lt;/p&gt;
+&lt;p&gt;今天打开 &lt;a href=&quot;https://deepwiki.com/Besty0728/Unity-Skills&quot;&gt;DeepWiki&lt;/a&gt; 发现，我的 &lt;strong&gt;Unity-Skills&lt;/strong&gt; 项目已经被完整收录并自动生成了结构化技术文档。&lt;/p&gt;
+&lt;p&gt;作为一个独立开发者，看到自己的项目被知识索引平台收录，确实是一个值得记录的里程碑。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepwiki.com/Besty0728/Unity-Skills&quot;&gt;DeepWiki 收录页面&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/deepwiki-unityskills.webp&quot; alt=&quot;DeepWiki 收录页面图片&quot; /&gt;&lt;/h2&gt;
+&lt;h1&gt;DeepWiki 做了什么？&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepwiki.com&quot;&gt;DeepWiki&lt;/a&gt; 是一个基于 AI 的代码知识库平台，它会自动分析 GitHub 仓库的源码，生成可交互的技术文档，包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;架构概览&lt;/strong&gt;：自动梳理系统组件和核心设计模式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设计原则&lt;/strong&gt;：提炼出 Reflection-Based Skill Discovery、Batch 操作、Token 优化、Domain Reload Recovery 等核心理念&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;技能分类索引&lt;/strong&gt;：将 277+ Skills 按类别结构化展示&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI 平台集成说明&lt;/strong&gt;：清晰呈现对 Claude Code、Antigravity、Gemini CLI、Codex 的适配细节&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;换句话说，DeepWiki 把我写的代码和文档，自动转化成了一份让人一目了然的&lt;strong&gt;技术百科&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h1&gt;回顾 Unity-Skills&lt;/h1&gt;
+&lt;p&gt;Unity-Skills 是我目前投入最多精力的项目——一个基于 REST API 的 AI 驱动型 Unity 编辑器自动化框架。&lt;/p&gt;
+&lt;p&gt;截至文章发布日期&lt;strong&gt;2026-02-10&lt;/strong&gt;目前已经迭代到 &lt;strong&gt;v1.4.3&lt;/strong&gt;，收获了 &lt;strong&gt;103 Stars&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/github-unityskills.webp&quot; alt=&quot;GitHub 项目主页&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;它解决了什么？&lt;/h2&gt;
+&lt;p&gt;做 Unity 开发时，我发现一个痛点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;向 AI 描述 Unity 场景结构太费劲，来回沟通效率极低。重复性操作（创建物体、配置组件、调参数）占据大量时间，而现有工具缺少批处理和安全回滚能力。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;于是 Unity-Skills 诞生了。核心思路很简单——&lt;strong&gt;让 AI 通过 HTTP 请求直接操控 Unity 编辑器&lt;/strong&gt;，不再需要人工中转。&lt;/p&gt;
+&lt;h2&gt;核心亮点&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;特性&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;277+ Skills&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;覆盖 GameObject、Component、Scene、Material、Prefab、Light 等全类别操作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Batch 批处理&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;一次请求完成多个操作，大幅减少 HTTP 通信开销&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;事务回滚&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;操作失败自动回滚，场景零残留&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Token 优化&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Result Truncation + 精简 SKILL.md，Token 消耗降低约 40%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;多实例支持&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;自动端口发现 + 全局注册表，同时操控多个 Unity 项目&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;全平台兼容&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Claude Code / Antigravity / Gemini CLI / Codex 均完美支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;一些数字&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;⭐ 项目从第一个 commit 到现在，Skills 从最初的不到 100 个增长到 &lt;strong&gt;277+&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;🎥 独家支持 &lt;strong&gt;Cinemachine 2.x/3.x 双版本&lt;/strong&gt;自动检测与安装&lt;/li&gt;
+&lt;li&gt;🔌 &lt;strong&gt;4 大 AI 终端&lt;/strong&gt;深度适配，是目前兼容性最广的 Unity AI 自动化方案之一&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h1&gt;被收录意味着什么？&lt;/h1&gt;
+&lt;p&gt;对我来说，DeepWiki 的收录不仅仅是&quot;多了一个展示页面&quot;，更是一种&lt;strong&gt;技术可见性的证明&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;代码质量被认可&lt;/strong&gt;：DeepWiki 的 AI 能够正确理解并梳理项目架构，说明代码组织和文档都达到了一定水准&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;降低上手门槛&lt;/strong&gt;：新用户可以通过 DeepWiki 快速了解项目全貌，不需要逐个文件翻阅&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;社区发现性提升&lt;/strong&gt;：更多开发者能通过知识检索找到 Unity-Skills，扩大项目影响力&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h1&gt;下一步&lt;/h1&gt;
+&lt;p&gt;Unity-Skills 还在持续迭代：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📦 持续扩充 Skill 库，覆盖更多 Unity 编辑器场景&lt;/li&gt;
+&lt;li&gt;⚡ 性能优化持续进行&lt;/li&gt;
+&lt;li&gt;🤖 跟进最新 AI 终端的集成规范&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你也在用 AI 辅助 Unity 开发，欢迎试试：&lt;/p&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/Unity-Skills&quot;}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/Besty0728/Unity-Skills.git?path=/SkillsForUnity
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;项目地址&lt;/strong&gt;：&lt;a href=&quot;https://github.com/Besty0728/Unity-Skills&quot;&gt;GitHub - Besty0728/Unity-Skills&lt;/a&gt;&lt;br /&gt;
+&lt;strong&gt;DeepWiki 页面&lt;/strong&gt;：&lt;a href=&quot;https://deepwiki.com/Besty0728/Unity-Skills&quot;&gt;deepwiki.com/Besty0728/Unity-Skills&lt;/a&gt;&lt;/p&gt;
+</content:encoded></item><item><title>Win系统-Mac系统的使用感受+软件推荐</title><link>https://wsunskyr.github.io/posts/win-mac/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/win-mac/</guid><description>本文介绍从Win电脑上手Mac电脑的一些基础操作、软件推荐</description><pubDate>Thu, 16 Jul 2026 21:02:02 GMT</pubDate><content:encoded>&lt;h1&gt;关于为何上手这款Mac&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/win-mac4.webp&quot; alt=&quot;终端快捷键设置图片&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;实习之后想的是Win台式+Mac移动开发&lt;/li&gt;
+&lt;li&gt;Mac的生态以及系统对于AI开发等具有更好地支持性&lt;/li&gt;
+&lt;li&gt;Mac Book Air真的很轻便，我真的不要那么重的Win游戏本了，太沉重、太吵闹&lt;/li&gt;
+&lt;li&gt;最后一段时间在宿舍会有晚上断电，Win游戏本的续航在我没完成Vibe Coding时简直就是打断我“心流状态”的罪魁祸首，Mac的能耗比简直优美&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1&gt;我个人设备的区别&lt;/h1&gt;
+&lt;p&gt;这台MacBookAir（M5，10C+10G，16G+1T）相比于我的暗影精灵（i9+4060，16+1T）性能虽总体较低，但是其他的优点完全碾压&lt;/p&gt;
+&lt;p&gt;1.轻，&lt;strong&gt;mac仅仅1.23kg&lt;/strong&gt;，相较于那个omen的2.4kg很轻&lt;/p&gt;
+&lt;p&gt;2.移动使用下mac性能几乎无损，omen体验很差&lt;/p&gt;
+&lt;h1&gt;迁移个人体验差别&lt;/h1&gt;
+&lt;h2&gt;操作逻辑&lt;/h2&gt;
+&lt;h3&gt;触控板&lt;/h3&gt;
+&lt;p&gt;Mac的触控板很好用，其中多指操作主要会用以下几个&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;三指拖动文件&lt;/li&gt;
+&lt;li&gt;四指捏合出现应用面板&lt;/li&gt;
+&lt;li&gt;四指上滑类似于当前应用总览&lt;/li&gt;
+&lt;li&gt;四指下滑查看当前聚焦应用的窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;快捷键&lt;/h3&gt;
+&lt;p&gt;mac 上面的快捷键会更多地用于日常操作，熟练使用快捷键会让你的 Mac 舒适程度更上一层楼。&lt;strong&gt;Mac 中 Command 键类比于 Win 中的 Ctrl 键，Option 类比 Alt 键，Control 反而默认较少，Shift 相同；下面只介绍部分常用。&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Q&lt;/td&gt;
+&lt;td&gt;彻底退出应用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + W&lt;/td&gt;
+&lt;td&gt;关闭当前应用窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Option + W&lt;/td&gt;
+&lt;td&gt;关闭当前应用的所有窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + M&lt;/td&gt;
+&lt;td&gt;最小化当前应用窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Option + M&lt;/td&gt;
+&lt;td&gt;最小化当前应用的所有窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Control + F&lt;/td&gt;
+&lt;td&gt;进入 / 退出全屏模式（Full Screen）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Tab&lt;/td&gt;
+&lt;td&gt;切换应用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + ,&lt;/td&gt;
+&lt;td&gt;打开当前应用的设置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;同样你也可以设定自己的快捷键位，以我个人为例：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;功能 / 说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Shift + 3&lt;/td&gt;
+&lt;td&gt;全屏截图&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Shift + 4&lt;/td&gt;
+&lt;td&gt;区域截图；加按 Space 可截取窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Shift + 5&lt;/td&gt;
+&lt;td&gt;截图工具栏，支持录屏、定时截图等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Command + Shift + A&lt;/td&gt;
+&lt;td&gt;截图到剪贴板（个人自定义快捷键）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Control + T&lt;/td&gt;
+&lt;td&gt;在指定文件目录打开 iTerm2 终端&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/win-mac3.webp&quot; alt=&quot;终端快捷键设置图片&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/win-mac2.webp&quot; alt=&quot;终端快捷键设置图片&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;到手建议修改设置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;触控板-点按力度改为弱、追踪速度建议倒数第二档即可、轻点以点按开启&lt;/li&gt;
+&lt;li&gt;访达开启显示隐藏内容（Command+Shift+.）&lt;/li&gt;
+&lt;li&gt;访达显示所有文件扩展名开启&lt;/li&gt;
+&lt;li&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/win-mac1.webp&quot; alt=&quot;访达设置图片&quot; /&gt;&lt;/li&gt;
+&lt;li&gt;隐私与安全性底部，允许来源应用程序改为 App Store与已知开发者&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;安装&amp;amp;卸载应用&lt;/h3&gt;
+&lt;p&gt;安装应用除了AppStore，还有pkg、dmg两种安装软件方式，根据其对应指引将软件图标拖入文件夹即可，卸载软件为拖入废纸篓即可（下文介绍更干净的卸载辅助）&lt;/p&gt;
+&lt;h1&gt;软件等推荐&lt;/h1&gt;
+&lt;h2&gt;1.Homebrew包管理器&lt;/h2&gt;
+&lt;p&gt;类似于linux中的apt，可以用于安装应用、依赖等等，非常实用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/bin/zsh -c &quot;$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2.Loop窗口管理&lt;/h2&gt;
+&lt;p&gt;可以提供非常方便的快速分屏应用，自定义后的Command+Control+小方向键非常直观的反映
+::github{repo=&quot;mrkai77/Loop&quot;}&lt;/p&gt;
+&lt;h2&gt;3.Maccy粘贴板管理&lt;/h2&gt;
+&lt;p&gt;让你可以更方便使用粘贴板，支持查看之前粘贴过的
+::github{repo=&quot;p0deje/Maccy&quot;}
+::link{url=&quot;https://maccy.app&quot;}
+安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install maccy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;4.LocalSend局域网与Win电脑互传（迁移文件等）&lt;/h2&gt;
+&lt;p&gt;个人使用其来完成win电脑与mac的互传，苹果设备间更建议直接隔空投送
+::link{url=&quot;https://localsend.org/zh-CN&quot;}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install --cask localsend
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;5.Mos鼠标防止反人类&lt;/h2&gt;
+&lt;p&gt;默认手势的自然滑动很顺手，但是开启的同时接入鼠标非常反人类，开启反转无法保持触控板，这款软件可解决该问题
+::github{repo=&quot;Caldis/Mos&quot;}
+::link{url=&quot;https://mos.caldis.me&quot;}
+安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install --cask mos
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;6.iTerm2终端&lt;/h2&gt;
+&lt;p&gt;个人使用这个纯粹是因为感觉自带默认终端不美观还不好配置暗黑模式
+::github{repo=&quot;gnachman/iterm2&quot;}
+::link{url=&quot;https://iterm2.com&quot;}&lt;/p&gt;
+&lt;h2&gt;7.Stats状态显示&lt;/h2&gt;
+&lt;p&gt;可以在右上角状态栏更直观的观察当前Mac状态负载
+::github{repo=&quot;exelban/stats&quot;}
+::link{url=&quot;https://mac-stats.com&quot;}
+安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install stats
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;8.AppCleaner卸载辅助&lt;/h2&gt;
+&lt;p&gt;可以清理干净软件相关依赖，会自动在你将软件拖入废纸篓后启用
+::link{url=&quot;https://freemacsoft.net/appcleaner&quot;}&lt;/p&gt;
+</content:encoded></item><item><title>还在嫌弃Windows难用？不妨来体验一下隐藏功能</title><link>https://wsunskyr.github.io/posts/windows-powertoys/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/windows-powertoys/</guid><description>Windows的默认设计有很多人都反馈难用，那是你默认用的都是残血Win，不妨使用PowerToys来解锁满血Windows，变得更加人性化</description><pubDate>Sun, 19 Apr 2026 16:54:54 GMT</pubDate><content:encoded>&lt;h1&gt;1.你的Windows是否一样反人类？&lt;/h1&gt;
+&lt;p&gt;起因是因为宿舍断电，我有时候要在黑暗环境里完成编写收尾，但是即使我亮度拉到最小，
+平时舒适的白色也会非常刺眼，于是想切换到深色模式，结果一查资料，切换很是麻烦，
+好在我们发现了官方提供的有用的工具，本篇的主角--&lt;strong&gt;PowerToys&lt;/strong&gt;&lt;/p&gt;
+&lt;h1&gt;2.PowerToys是什么？&lt;/h1&gt;
+&lt;p&gt;PowerToys是微软官方出品的是一系列帮助你定制 Windows 和简化日常任务的工具，它提供了很多
+我们期望的功能，来让我们的Windows变得更加人性化，是一个优秀的高级工具&lt;/p&gt;
+&lt;h2&gt;项目地址&lt;/h2&gt;
+&lt;p&gt;::github{repo=&quot;microsoft/PowerToys&quot;}&lt;/p&gt;
+&lt;p&gt;同样你可以前往你的Microsoft应用商店里面去直接下载&lt;/p&gt;
+&lt;p&gt;&amp;lt;a style=&quot;text-decoration:none;display:inline-block;line-height:0;&quot; href=&quot;https://aka.ms/getPowertoys&quot;&amp;gt;
+&amp;lt;picture&amp;gt;
+&amp;lt;source media=&quot;(prefers-color-scheme: light)&quot; srcset=&quot;/images/StoreBadge-dark.webp&quot; width=&quot;240&quot; /&amp;gt;
+&amp;lt;img src=&quot;/images/StoreBadge-light.webp&quot; width=&quot;240&quot; alt=&quot;Get it from Microsoft Store&quot; style=&quot;display:block;&quot; /&amp;gt;
+&amp;lt;/picture&amp;gt;
+&amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;再或者使用Winget&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;winget install Microsoft.PowerToys -s winget
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;3.PowToys的推荐功能&lt;/h1&gt;
+&lt;h2&gt;1.光暗一键切换&lt;/h2&gt;
+&lt;p&gt;本篇文章初始最想解决的痛点，一键切换（启动PowerToys的前提下，所以我们建议设置为开机自启）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potyslightswitch.webp&quot; alt=&quot;光暗模式&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;2.快速浏览文件&lt;/h2&gt;
+&lt;p&gt;类似于MacOS中的空格按下查看文件，之前我是使用QuickLook这个软件来实现的这种功能&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potyspeek.webp&quot; alt=&quot;快速浏览&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;3.固定置顶窗口&lt;/h2&gt;
+&lt;p&gt;这个非常利好于我们避免聚焦的软件切换而遮挡想要获取的信息，传统的分屏会让软件比例拉伸，不利于观感&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potyspintop.webp&quot; alt=&quot;置顶窗口&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;4.鼠标快速寻找&lt;/h2&gt;
+&lt;p&gt;平时在大比例显示器中会出现找不到自己的鼠标去哪里了，我们还要费时间去寻找它，这个功能帮我们快速寻找到鼠标&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potysfindcursor.webp&quot; alt=&quot;寻找鼠标&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;5.自定义布局&lt;/h2&gt;
+&lt;p&gt;这个可以让你自定义设定好你喜欢的应用比例布局，相对实用&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potyslayout1.webp&quot; alt=&quot;布局设置&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/potyslayout2.webp&quot; alt=&quot;定义布局&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;6.颜色提取器&lt;/h2&gt;
+&lt;p&gt;这个可以让你方便的提取任何地方的色彩信息，不用打开图像工具或寻找源码等，支持多种格式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potyscolor.webp&quot; alt=&quot;提取颜色&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;7.文本提取器&lt;/h2&gt;
+&lt;p&gt;这个其实就是底层的OCR技术，将支持的文字直接复制到你的剪贴板里，还是可以的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/potystext.webp&quot; alt=&quot;提取文字&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>Claude Code 终端美化指南</title><link>https://wsunskyr.github.io/posts/claudecode_beautify/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/claudecode_beautify/</guid><description>习惯了 IDE 的你，面对 Claude Code 原始的终端界面是否感到不适？本篇手把手教你从状态栏到字体全面美化 Claude Code，让命令行也能赏心悦目。</description><pubDate>Thu, 26 Feb 2026 23:02:54 GMT</pubDate><content:encoded>&lt;p&gt;不少同学初次接触 Claude Code 时，多少会对纯命令行界面的&quot;朴素&quot;感到不适——毕竟大家日常都习惯了 IDE 的丰富界面。好消息是，只需要几步简单的配置，就能让你的 Claude Code 焕然一新。&lt;/p&gt;
+&lt;h1&gt;1. 状态栏优化&lt;/h1&gt;
+&lt;p&gt;默认的 Claude Code 终端没有任何额外的状态信息展示，看起来相当单调。这里推荐一个开箱即用的状态栏工具 &lt;strong&gt;ccstatusline&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;::github{repo=&quot;sirmalloc/ccstatusline&quot;}&lt;/p&gt;
+&lt;h2&gt;美化前&lt;/h2&gt;
+&lt;p&gt;原始状态下，Claude Code 的终端是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE1.webp&quot; alt=&quot;Claude Code 原始界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;美化后&lt;/h2&gt;
+&lt;p&gt;添加状态栏后，立刻变得信息丰富且美观：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE2.webp&quot; alt=&quot;Claude Code 状态栏美化效果&quot; /&gt;
+以及
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE9.webp&quot; alt=&quot;Claude Code 状态栏美化效果2&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;安装与配置&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前提条件：Windows 系统，已安装 Node.js&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;只需一条命令即可完成安装：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npx ccstatusline@latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装完成后会进入交互式配置界面，你可以根据个人喜好自由定制（也可参照官方文档进行更深度的自定义配置，包括安装 Powerline 字体等）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE3.webp&quot; alt=&quot;ccstatusline 配置界面&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;以下是我个人的配置方案，供参考：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Edit Lines&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Line 1：保留 4 个默认组件（模型名称、上下文窗口、Git 分支、改动数量）&lt;/li&gt;
+&lt;li&gt;Line 3：添加 &lt;code&gt;Custom Text&lt;/code&gt;（自定义文本：&lt;code&gt;Betsy-ClaudeCode&lt;/code&gt;）+ &lt;code&gt;Session Clock&lt;/code&gt;（会话计时器）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Powerline Setup&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;除 &lt;code&gt;Align Widgets&lt;/code&gt; 外全部启用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Separator&lt;/code&gt;：&lt;em&gt;Triangle Right&lt;/em&gt; | &lt;code&gt;Start Cap&lt;/code&gt;：&lt;em&gt;Lower Triangle&lt;/em&gt; | &lt;code&gt;End Cap&lt;/code&gt;：&lt;em&gt;Triangle&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Themes&lt;/code&gt;：&lt;em&gt;Nord-aurora&lt;/em&gt; 配色方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Terminal Options&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Color Level&lt;/code&gt;：&lt;em&gt;Truecolor&lt;/em&gt;（确保终端色彩还原度最佳）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置完成后，可以在 Claude Code 的 &lt;code&gt;settings.json&lt;/code&gt; 中确认是否生效：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&quot;statusLine&quot;: {
+    &quot;command&quot;: &quot;ccstatusline&quot;,
+    &quot;type&quot;: &quot;command&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;2. 字体美化&lt;/h1&gt;
+&lt;p&gt;一款优秀的等宽字体不仅能提升代码可读性，还能让终端整体观感大幅提升。这里个人强烈推荐 &lt;strong&gt;Maple Mono NF CN&lt;/strong&gt; ——一款同时支持中英文的等宽编程字体，内置 Nerd Font 图标：&lt;/p&gt;
+&lt;p&gt;::github{repo=&quot;subframe7536/maple-font&quot;}&lt;/p&gt;
+&lt;h2&gt;方式一：可视化配置各个终端&lt;/h2&gt;
+&lt;p&gt;在任何窗口点击设置，进入后选择对应终端修改即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE5.webp&quot; alt=&quot;终端字体配置1&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE6.webp&quot; alt=&quot;终端字体配置2&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE7.webp&quot; alt=&quot;终端字体配置3&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;方式二：让 Claude Code 帮你改（懒人推荐）&lt;/h2&gt;
+&lt;p&gt;如果你的电脑已安装该字体，直接把下面这段话发给 Claude Code，让它帮你完成配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;现在帮我将终端字体显示改为 Maple Mono NF CN ，字体路径.....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;方式三：手动修改 Windows Terminal 配置&lt;/h2&gt;
+&lt;p&gt;找到 Windows Terminal 的配置文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C:\Users\&amp;lt;你的用户名&amp;gt;\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 &lt;code&gt;profiles.defaults&lt;/code&gt; 中添加字体配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&quot;defaults&quot;: {
+    &quot;font&quot;: {
+        &quot;face&quot;: &quot;Maple Mono NF CN&quot;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;方式三：IDE 内使用&lt;/h2&gt;
+&lt;p&gt;如果你主要在 VS Code 等 IDE 中使用 Claude Code，直接在 IDE 的设置中修改IDE整体字体为 &lt;code&gt;Maple Mono NF CN&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;h1&gt;3. 背景美化&lt;/h1&gt;
+&lt;p&gt;上文字体可视化配置同理，下滑到对应位置修改即可
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE8.webp&quot; alt=&quot;终端背景配置&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;4. 最终效果对比&lt;/h1&gt;
+&lt;p&gt;经过状态栏 + 字体的双重美化，来看看前后对比：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;美化前：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE1.webp&quot; alt=&quot;Claude Code 美化前&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;美化后：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE4.webp&quot; alt=&quot;Claude Code 美化后1代&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;添加背景美化后
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCodeBE9.webp&quot; alt=&quot;Claude Code 美化后2代&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;是不是瞬间从&quot;原始人终端&quot;变成了&quot;赛博朋克工作站&quot;？赶紧动手试试吧！&lt;/p&gt;
+</content:encoded></item><item><title>ClaudeCode下载代理(Worker)</title><link>https://wsunskyr.github.io/posts/claudecode_install_proxy/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/claudecode_install_proxy/</guid><description>通过 Cloudflare Worker 搭建 Claude Code 安装代理，解决国内无法直接下载的问题</description><pubDate>Tue, 24 Feb 2026 23:15:08 GMT</pubDate><content:encoded>&lt;h1&gt;1. Claude Code 是什么？&lt;/h1&gt;
+&lt;p&gt;简单来讲，Claude Code 就是一款 &lt;strong&gt;AI 智能编程工具&lt;/strong&gt;，具有强大的 Vibe Coding 能力，详细介绍请看 &lt;a href=&quot;https://www.micostar.cc/posts/claudecode/&quot;&gt;Claude Code 使用笔记&lt;/a&gt;。&lt;/p&gt;
+&lt;h1&gt;2. 入门安装&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于不可抗因素，Claude 的母公司 &lt;strong&gt;Anthropic&lt;/strong&gt; 对中国大陆拒绝提供 AI 服务，禁止使用 Claude 系列模型。但我们仅仅只是想使用 Claude Code 这个工具（Claude Code ≠ AI 模型），所以不要再发出类似于&quot;Cursor 不如 Claude&quot;这种驴唇不对马嘴的言论了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;官方的 NPM 安装方式已处于废弃状态，更推荐使用&lt;strong&gt;原生安装&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;但正如前文所说，如果直接使用官方命令（国内正常网络环境下）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;irm https://claude.ai/install.ps1 | iex
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;大概率会得到以下报错：
+&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode4.webp&quot; alt=&quot;下载出错页面图片&quot; /&gt;
+因此，我们提供了基于 Cloudflare Worker 的加速下载方案。&lt;/p&gt;
+&lt;h1&gt;3. Worker 配置&lt;/h1&gt;
+&lt;h2&gt;3.1 核心 Worker 代码&lt;/h2&gt;
+&lt;p&gt;请将 &lt;code&gt;SELF_BASE&lt;/code&gt; 修改为你要使用的加速域名：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const CLAUDE = &quot;https://claude.ai&quot;;
+const SELF_BASE = &quot;https://你的加速域名&quot;;
+const ALLOWED_INSTALL = new Set([&quot;/install.ps1&quot;, &quot;/install.sh&quot;, &quot;/install.cmd&quot;]);
+// 安装脚本体积上限 1MB（正常脚本 &amp;lt;50KB，此值仅防异常/被劫持场景）
+const MAX_INSTALL_SCRIPT_SIZE = 1 * 1024 * 1024;
+
+function isAllowedGcsPath(p) {
+  // 只允许 claude-code-dist-* bucket 下的路径
+  const pathOnly = p.split(&apos;?&apos;)[0];
+  return /^claude-code-dist-[0-9a-f\-]+\//.test(pathOnly);
+}
+
+function withTimeout(ms) {
+  const controller = new AbortController();
+  const id = setTimeout(
+    () =&amp;gt; controller.abort(new Error(&quot;Upstream fetch timeout&quot;)),
+    ms
+  );
+  return { controller, cancel: () =&amp;gt; clearTimeout(id) };
+}
+
+/** 安全文本响应头 */
+function secHeaders(extra = {}) {
+  return {
+    &quot;Content-Type&quot;: &quot;text/plain; charset=utf-8&quot;,
+    &quot;Cache-Control&quot;: &quot;no-store&quot;,
+    &quot;X-Content-Type-Options&quot;: &quot;nosniff&quot;,
+    &quot;X-Frame-Options&quot;: &quot;DENY&quot;,
+    ...extra,
+  };
+}
+
+async function buildUpstreamErrorResponse({
+  title,
+  upstreamResp,
+  extraHeaders = {},
+}) {
+  // 消费 body 防止连接泄漏
+  try { await upstreamResp.text(); } catch {}
+
+  const body = [
+    title,
+    `Time: ${new Date().toISOString()}`,
+    `Upstream status: ${upstreamResp.status}`,
+  ].join(&quot;\n&quot;);
+
+  return new Response(body, {
+    status: 502,
+    headers: secHeaders({
+      &quot;X-Proxy-Error&quot;: &quot;upstream_non_ok&quot;,
+      ...extraHeaders,
+    }),
+  });
+}
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    let path = url.pathname;
+
+    // ===== 处理 OPTIONS 预检请求 =====
+    if (request.method === &quot;OPTIONS&quot;) {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,
+          &quot;Access-Control-Allow-Methods&quot;: &quot;GET, HEAD, OPTIONS&quot;,
+          &quot;Access-Control-Allow-Headers&quot;: &quot;Content-Type, User-Agent, Accept, Accept-Encoding&quot;,
+          &quot;Access-Control-Max-Age&quot;: &quot;86400&quot;,
+        },
+      });
+    }
+
+    // ===== 只允许 GET / HEAD =====
+    if (![&quot;GET&quot;, &quot;HEAD&quot;].includes(request.method)) {
+      return new Response(&quot;Method Not Allowed&quot;, {
+        status: 405,
+        headers: secHeaders(),
+      });
+    }
+
+    if (path === &quot;/favicon.ico&quot;) {
+      return new Response(null, { status: 204 });
+    }
+
+    // 健康检查页面
+    if (path === &quot;/&quot;) {
+      const clientIp = request.headers.get(&quot;CF-Connecting-IP&quot;) || &quot;unknown&quot;;
+      const clientCountry = request.headers.get(&quot;CF-IPCountry&quot;) || &quot;unknown&quot;;
+
+      const checks = await Promise.allSettled([
+        (async () =&amp;gt; {
+          const { controller, cancel } = withTimeout(15000);
+          try {
+            const resp = await fetch(CLAUDE + &quot;/install.ps1&quot;, {
+              signal: controller.signal,
+              headers: { &quot;User-Agent&quot;: &quot;Mozilla/5.0&quot; },
+            });
+            cancel();
+            if (!resp.ok) return { ok: false, msg: `HTTP ${resp.status}` };
+            const text = await resp.text();
+            const hasGcs = text.includes(&quot;storage.googleapis.com/&quot;);
+            const rewritten = text.replace(
+              /\$GCS_BUCKET = &quot;https:\/\/storage\.googleapis\.com\/([^&quot;]+)&quot;/g,
+              `$GCS_BUCKET = &quot;${SELF_BASE}/gcs/$1&quot;`
+            );
+            const ok = rewritten.includes(SELF_BASE + &quot;/gcs/&quot;);
+            return { ok, msg: ok ? &quot;拉取成功，改写正常&quot; : (hasGcs ? &quot;正则未匹配&quot; : &quot;源脚本无 GCS 链接&quot;) };
+          } catch (e) {
+            cancel();
+            return { ok: false, msg: String(e) };
+          }
+        })(),
+        (async () =&amp;gt; {
+          const { controller, cancel } = withTimeout(20000);
+          try {
+            const resp = await fetch(
+              `https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases/latest`,
+              { signal: controller.signal, headers: { &quot;User-Agent&quot;: &quot;CloudflareWorker/1.0&quot; } }
+            );
+            cancel();
+            if (!resp.ok) return { ok: false, msg: `HTTP ${resp.status}` };
+            const version = (await resp.text()).trim();
+            return { ok: true, msg: `版本: ${version}` };
+          } catch (e) {
+            cancel();
+            return { ok: false, msg: String(e) };
+          }
+        })(),
+      ]);
+
+      const ps1Status = checks[0].status === &quot;fulfilled&quot; ? checks[0].value : { ok: false, msg: &quot;检查失败&quot; };
+      const gcsStatus = checks[1].status === &quot;fulfilled&quot; ? checks[1].value : { ok: false, msg: &quot;检查失败&quot; };
+
+      const html = `&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+  &amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&amp;gt;
+  &amp;lt;title&amp;gt;Claude Code Proxy - 健康检查&amp;lt;/title&amp;gt;
+  &amp;lt;style&amp;gt;
+    body { font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif; margin: 40px; background: #f5f5f5; }
+    .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    h1 { color: #333; margin-bottom: 30px; }
+    .check { margin: 20px 0; padding: 15px; border-left: 4px solid #ddd; background: #fafafa; }
+    .check.ok { border-left-color: #22c55e; background: #f0fdf4; }
+    .check.fail { border-left-color: #ef4444; background: #fef2f2; }
+    .status { font-weight: bold; margin-bottom: 5px; }
+    .status.ok { color: #22c55e; }
+    .status.fail { color: #ef4444; }
+    .msg { color: #666; font-size: 14px; }
+    .info { margin-top: 30px; padding: 15px; background: #f0f9ff; border-left: 4px solid #3b82f6; }
+    .info-title { font-weight: bold; color: #1e40af; margin-bottom: 8px; }
+    .info-item { color: #666; font-size: 14px; margin: 5px 0; }
+  &amp;lt;/style&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;div class=&quot;container&quot;&amp;gt;
+    &amp;lt;h1&amp;gt;✓ Claude Code Proxy 运行正常&amp;lt;/h1&amp;gt;
+
+    &amp;lt;div class=&quot;check ${ps1Status.ok ? &quot;ok&quot; : &quot;fail&quot;}&quot;&amp;gt;
+      &amp;lt;div class=&quot;status ${ps1Status.ok ? &quot;ok&quot; : &quot;fail&quot;}&quot;&amp;gt;
+        ${ps1Status.ok ? &quot;✓&quot; : &quot;✗&quot;} install.ps1 改写
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;msg&quot;&amp;gt;${ps1Status.msg}&amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;div class=&quot;check ${gcsStatus.ok ? &quot;ok&quot; : &quot;fail&quot;}&quot;&amp;gt;
+      &amp;lt;div class=&quot;status ${gcsStatus.ok ? &quot;ok&quot; : &quot;fail&quot;}&quot;&amp;gt;
+        ${gcsStatus.ok ? &quot;✓&quot; : &quot;✗&quot;} GCS 代理
+      &amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;msg&quot;&amp;gt;${gcsStatus.msg}&amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;div class=&quot;info&quot;&amp;gt;
+      &amp;lt;div class=&quot;info-title&quot;&amp;gt;访问者信息&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;info-item&quot;&amp;gt;IP: ${clientIp}&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;info-item&quot;&amp;gt;地区: ${clientCountry}&amp;lt;/div&amp;gt;
+      &amp;lt;div class=&quot;info-item&quot;&amp;gt;时间: ${new Date().toISOString()}&amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;div style=&quot;margin-top:20px;padding:15px;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;&quot;&amp;gt;
+      &amp;lt;strong&amp;gt;声明&amp;lt;/strong&amp;gt;
+      &amp;lt;p style=&quot;margin:8px 0;font-size:14px;color:#333;&quot;&amp;gt;本站为非官方代理，仅用于中国大陆加速 Claude Code 安装。&amp;lt;/p&amp;gt;
+      &amp;lt;p style=&quot;margin:8px 0;font-size:14px;&quot;&amp;gt;官方网站：&amp;lt;a href=&quot;https://claude.ai&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; style=&quot;color:#0066cc;&quot;&amp;gt;https://claude.ai&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;`;
+
+      return new Response(html, {
+        status: 200,
+        headers: { &quot;Content-Type&quot;: &quot;text/html; charset=utf-8&quot; },
+      });
+    }
+
+    // 安装脚本：从 claude.ai 拉取，改写 GCS 链接指向自身
+    if (ALLOWED_INSTALL.has(path)) {
+      const upstreamUrl = CLAUDE + path;
+      const { controller, cancel } = withTimeout(15000);
+
+      let upstream;
+      try {
+        const fetchOpts = {
+          method: request.method,
+          headers: {
+            &quot;User-Agent&quot;: request.headers.get(&quot;User-Agent&quot;) || &quot;Mozilla/5.0&quot;,
+            Accept: &quot;*/*&quot;,
+          },
+          redirect: &quot;follow&quot;,
+          signal: controller.signal,
+        };
+        upstream = await fetch(upstreamUrl, fetchOpts);
+      } catch (e) {
+        cancel();
+        return new Response(
+          `Upstream fetch failed (install script)\nTime: ${new Date().toISOString()}\nError: ${String(e)}\n`,
+          {
+            status: 504,
+            headers: secHeaders({ &quot;X-Proxy-Error&quot;: &quot;install_fetch_failed&quot; }),
+          }
+        );
+      } finally {
+        cancel();
+      }
+
+      // HEAD 直接透传状态 + 头（不读 body）
+      if (request.method === &quot;HEAD&quot;) {
+        const h = new Headers(upstream.headers);
+        h.set(&quot;Cache-Control&quot;, &quot;no-store, max-age=0, must-revalidate&quot;);
+        h.set(&quot;Pragma&quot;, &quot;no-cache&quot;);
+        h.set(&quot;Expires&quot;, &quot;0&quot;);
+        h.set(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;);
+        h.set(&quot;X-Proxy-Source&quot;, `rewrite:${path}`);
+        return new Response(null, { status: upstream.status, headers: h });
+      }
+
+      if (!upstream.ok) {
+        return buildUpstreamErrorResponse({
+          title: &quot;Failed to fetch install script from claude.ai&quot;,
+          upstreamResp: upstream,
+          extraHeaders: { &quot;X-Proxy-Source&quot;: `rewrite:${path}` },
+        });
+      }
+
+      // ---- 大小保护：先查 Content-Length 头 ----
+      const cl = Number(upstream.headers.get(&quot;content-length&quot;) || &quot;0&quot;);
+      if (cl &amp;gt; MAX_INSTALL_SCRIPT_SIZE) {
+        await upstream.body?.cancel();
+        return new Response(
+          `Install script too large (content-length: ${cl})\n`,
+          {
+            status: 502,
+            headers: secHeaders({ &quot;X-Proxy-Source&quot;: `rewrite:${path}` }),
+          }
+        );
+      }
+
+      const text = await upstream.text();
+
+      // ---- 大小保护：再查实际 body 长度（Content-Length 可能缺失或不准） ----
+      if (text.length &amp;gt; MAX_INSTALL_SCRIPT_SIZE) {
+        return new Response(&quot;Install script body too large\n&quot;, {
+          status: 502,
+          headers: secHeaders({ &quot;X-Proxy-Source&quot;: `rewrite:${path}` }),
+        });
+      }
+
+      // 改写 GCS 链接 → 走自身代理
+      // PowerShell: $GCS_BUCKET = &quot;https://storage.googleapis.com/...&quot;
+      let rewritten = text.replace(
+        /\$GCS_BUCKET = &quot;https:\/\/storage\.googleapis\.com\/([^&quot;]+)&quot;/g,
+        `$GCS_BUCKET = &quot;${SELF_BASE}/gcs/$1&quot;`
+      );
+      // Shell: GCS_BUCKET=&quot;https://storage.googleapis.com/...&quot;
+      rewritten = rewritten.replace(
+        /GCS_BUCKET=&quot;https:\/\/storage\.googleapis\.com\/([^&quot;]+)&quot;/g,
+        `GCS_BUCKET=&quot;${SELF_BASE}/gcs/$1&quot;`
+      );
+      // CMD: set &quot;GCS_BUCKET=https://storage.googleapis.com/...&quot;
+      rewritten = rewritten.replace(
+        /set &quot;GCS_BUCKET=https:\/\/storage\.googleapis\.com\/([^&quot;]+)&quot;/g,
+        `set &quot;GCS_BUCKET=${SELF_BASE}/gcs/$1&quot;`
+      );
+
+      return new Response(rewritten, {
+        status: 200,
+        headers: {
+          &quot;Content-Type&quot;: &quot;text/plain; charset=utf-8&quot;,
+          &quot;Cache-Control&quot;: &quot;no-store, max-age=0, must-revalidate&quot;,
+          Pragma: &quot;no-cache&quot;,
+          Expires: &quot;0&quot;,
+          &quot;X-Content-Type-Options&quot;: &quot;nosniff&quot;,
+          &quot;X-Proxy-Source&quot;: `rewrite:${path}`,
+        },
+      });
+    }
+
+    //  /gcs/*：代理到 storage.googleapis.com（白名单路径）
+    if (path.startsWith(&quot;/gcs/&quot;)) {
+      const gcsPath = path.slice(&quot;/gcs/&quot;.length);
+
+      if (!isAllowedGcsPath(gcsPath)) {
+        return new Response(&quot;Forbidden&quot;, { status: 403, headers: secHeaders() });
+      }
+
+      // 转发查询字符串
+      const target = `https://storage.googleapis.com/${gcsPath}${url.search}`;
+
+      // 白名单转发请求头，不泄漏 Cookie / Authorization / 用户 IP 等
+      const fwdHeaders = new Headers();
+      const FORWARD = [
+        &quot;Range&quot;,
+        &quot;Accept&quot;,
+        &quot;Accept-Encoding&quot;,
+        &quot;If-None-Match&quot;,
+        &quot;If-Modified-Since&quot;,
+      ];
+      for (const h of FORWARD) {
+        const v = request.headers.get(h);
+        if (v) fwdHeaders.set(h, v);
+      }
+      fwdHeaders.set(&quot;User-Agent&quot;, &quot;CloudflareWorker/1.0&quot;);
+
+      // exe/二进制文件按版本路径缓存，latest 和 manifest 不缓存
+      const isCacheable = !gcsPath.endsWith(&quot;/latest&quot;) &amp;amp;&amp;amp; !gcsPath.endsWith(&quot;/manifest.json&quot;);
+      const isExe = gcsPath.endsWith(&quot;/claude.exe&quot;);
+      const timeoutMs = isExe ? 600000 : 20000;
+      const { controller, cancel } = withTimeout(timeoutMs);
+
+      let upstream;
+      try {
+        const fetchOpts = {
+          method: request.method,
+          headers: fwdHeaders,
+          redirect: &quot;follow&quot;,
+          signal: controller.signal,
+          cf: isCacheable
+            ? { cacheEverything: true, cacheTtl: 86400 }
+            : { cacheEverything: false, cacheTtl: 0 },
+        };
+        upstream = await fetch(target, fetchOpts);
+      } catch (e) {
+        cancel();
+        return new Response(
+          `Upstream fetch failed (gcs proxy)\nTime: ${new Date().toISOString()}\nError: ${String(e)}\n`,
+          {
+            status: 504,
+            headers: secHeaders({
+              &quot;X-Proxy-Error&quot;: &quot;gcs_fetch_failed&quot;,
+              &quot;X-Proxy-Source&quot;: `gcs:${gcsPath}`,
+            }),
+          }
+        );
+      } finally {
+        cancel();
+      }
+
+      // 304 Not Modified：透传（CF 缓存层内部条件请求可能产生）
+      if (upstream.status === 304) {
+        const respHeaders = new Headers(upstream.headers);
+        respHeaders.set(&quot;X-Proxy-Source&quot;, `gcs:${gcsPath}`);
+        respHeaders.set(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;);
+        return new Response(null, { status: 304, headers: respHeaders });
+      }
+
+      // 非 2xx：返回友好错误，状态 502（避免客户端工具误当正常内容）
+      if (!(upstream.status &amp;gt;= 200 &amp;amp;&amp;amp; upstream.status &amp;lt; 300)) {
+        return buildUpstreamErrorResponse({
+          title: &quot;GCS upstream returned non-2xx&quot;,
+          upstreamResp: upstream,
+          extraHeaders: { &quot;X-Proxy-Source&quot;: `gcs:${gcsPath}` },
+        });
+      }
+
+      // 成功：流式透传 body
+      const respHeaders = new Headers(upstream.headers);
+      respHeaders.set(&quot;Cache-Control&quot;, isCacheable ? &quot;public, max-age=86400&quot; : &quot;no-store, max-age=0&quot;);
+      respHeaders.set(&quot;X-Proxy-Source&quot;, `gcs:${gcsPath}`);
+      respHeaders.set(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;);
+      // 确保保留 Content-Length 和 Content-Type
+      if (!respHeaders.has(&quot;Content-Type&quot;)) {
+        respHeaders.set(&quot;Content-Type&quot;, &quot;application/octet-stream&quot;);
+      }
+
+      return new Response(upstream.body, {
+        status: upstream.status,
+        headers: respHeaders,
+      });
+    }
+
+    return new Response(&quot;Not Found&quot;, { status: 404, headers: secHeaders() });
+  },
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;3.2 Worker 路由&lt;/h2&gt;
+&lt;p&gt;我们利用 Worker 的路由来进行转发（&lt;em&gt;&lt;strong&gt;workers.dev 域名在大陆无法正常访问&lt;/strong&gt;&lt;/em&gt;），请务必填写为 &lt;code&gt;你的加速域名/*&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode3.webp&quot; alt=&quot;Worker路由图片&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;然后记录下你的 Worker 分配的子域名，例如 &lt;code&gt;abc.abc.workers.dev&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode2.webp&quot; alt=&quot;Worker子域图片&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;4. 加速域名配置&lt;/h1&gt;
+&lt;p&gt;来到你托管在 Cloudflare 的域名下，选择 &lt;strong&gt;DNS&lt;/strong&gt; — &lt;strong&gt;记录&lt;/strong&gt;，将你预定的加速域名 &amp;lt;span style=&quot;color: red; font-weight: bold;&quot;&amp;gt;CNAME&amp;lt;/span&amp;gt; 指向&lt;strong&gt;你的 Worker 分配的子域名&lt;/strong&gt;，如图所示（记得开启小黄云）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode6.webp&quot; alt=&quot;DNS域名图片&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;5. 使用&lt;/h1&gt;
+&lt;p&gt;部署完成后，访问你的加速域名：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;能否成功下载也取决于你的网络能否正常连接到 Cloudflare，&lt;em&gt;&lt;strong&gt;请耐心等待&lt;/strong&gt;&lt;/em&gt;，Worker 速度可能不太稳定。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode1.webp&quot; alt=&quot;加速域名图片&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;然后选择适合你终端的下载方式（以 PowerShell 为例）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;irm https://c.ai0728.com.cn/install.ps1 | iex
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;成功效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ClaudeCode5.webp&quot; alt=&quot;成功代理图片&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>Unity Skills - 让AI直接操控Unity编辑器</title><link>https://wsunskyr.github.io/posts/unityskills/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/unityskills/</guid><description>一套让AI直接操控Unity的自动化方案：270+技能、批处理、事务回滚，兼容Antigravity/Claude Code/Gemini CLI等主流终端。</description><pubDate>Wed, 04 Feb 2026 22:47:30 GMT</pubDate><content:encoded>&lt;h1&gt;项目地址&lt;/h1&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/Unity-Skills&quot;}&lt;/p&gt;
+&lt;h1&gt;为什么做这个？&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Unity场景结构复杂，向AI描述时词不达意&lt;/li&gt;
+&lt;li&gt;重复性操作太多：创建GameObject、配置组件、调整参数...&lt;/li&gt;
+&lt;li&gt;Unity MCP理念不错，但缺少批处理、事务回滚等特性&lt;/li&gt;
+&lt;li&gt;日常使用多个AI工具，需要统一的自动化方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;核心特性&lt;/h1&gt;
+&lt;h2&gt;Token优化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Result Truncation&lt;/strong&gt;：自动精简返回结果&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;精简的SKILL.md&lt;/strong&gt;：减少上下文占用&lt;/li&gt;
+&lt;li&gt;相比于MCP实测消耗约降低40%&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unityskills2.webp&quot; alt=&quot;Result Truncation效果&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;270+工具集&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;覆盖GameObject、组件、场景、资源等常用操作&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Batch批处理&lt;/strong&gt;：单次请求完成多个操作&lt;/li&gt;
+&lt;li&gt;搭建场景结构从多次调用变为一次请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unityskills3.webp&quot; alt=&quot;Batch操作示例&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;事务回滚&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;操作失败自动回滚，避免残留半成品对象&lt;/li&gt;
+&lt;li&gt;保持场景状态一致性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unityskills4.webp&quot; alt=&quot;事务回滚机制&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;多实例管理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;自动端口发现（8090-8100）&lt;/li&gt;
+&lt;li&gt;全局注册表，支持同时操控多个Unity项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unityskills5.webp&quot; alt=&quot;多实例支持&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;AI终端兼容&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;AI终端&lt;/th&gt;
+&lt;th&gt;集成方式&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Antigravity&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/unity-skills&lt;/code&gt;斜杠命令、workflow&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Claude Code&lt;/td&gt;
+&lt;td&gt;自动意图识别&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Gemini CLI&lt;/td&gt;
+&lt;td&gt;experimental.skills规范，自动使用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Codex&lt;/td&gt;
+&lt;td&gt;$skill显隐式均调用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1&gt;安装&lt;/h1&gt;
+&lt;h2&gt;1. 安装Unity插件&lt;/h2&gt;
+&lt;p&gt;通过Package Manager添加Git URL：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/Besty0728/Unity-Skills.git?path=/SkillsForUnity
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2. 启动服务&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Window &amp;gt; UnitySkills &amp;gt; Start Server&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;3. 配置AI Skills&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 &lt;code&gt;Window &amp;gt; UnitySkills &amp;gt; Skill Installer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;选择AI终端，点击 &lt;strong&gt;Install&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;自动生成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SKILL.md&lt;/code&gt; - 技能说明&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;scripts/unity_skills.py&lt;/code&gt; - Python客户端&lt;/li&gt;
+&lt;li&gt;Antigravity额外生成&lt;code&gt;workflows/unity-skills.md&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;使用示例&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;场景搭建&lt;/strong&gt;：描述&quot;创建一个包含Player、敌人生成器和相机控制器的基础场景&quot;，AI完成具体操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;批量操作&lt;/strong&gt;：给场景中所有敌人添加血条UI，批处理一次完成。&lt;/p&gt;
+&lt;h1&gt;后续计划&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;扩充技能库&lt;/li&gt;
+&lt;li&gt;持续优化性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;技术栈&lt;/strong&gt;: Unity 2021.3+ | C# | Python | REST API&lt;br /&gt;
+&lt;strong&gt;许可证&lt;/strong&gt;: MIT&lt;br /&gt;
+&lt;strong&gt;作者&lt;/strong&gt;: Besty0728&lt;/p&gt;
+</content:encoded></item><item><title>Unity-PICO-共享空间锚点开发</title><link>https://wsunskyr.github.io/posts/unitymr-spatial-anchor/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/unitymr-spatial-anchor/</guid><description>这是我个人2025年下半年中的一个较为出色的MR（Mixed Reality）原理研究，这一部分国内知识分享很少，知识垄断明显，故决定为后来的其他要研究这方面的做出更多的经验分享！</description><pubDate>Fri, 02 Jan 2026 17:01:48 GMT</pubDate><content:encoded>&lt;h1&gt;Unity开发MR中应用空间锚点的场景&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;多人联机游戏需要对齐玩家元素（位置、物体位置等）&lt;/li&gt;
+&lt;li&gt;将物体持久化在某个现实对应的地方&lt;/li&gt;
+&lt;li&gt;没有大空间技术的普通消费级PICO头显设备MR玩家的同步&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;官方对于空间锚点的定义
+::link{url=&quot;https://developer-cn.picoxr.com/document/unity/spatial-anchors/&quot; title=&quot;空间锚点 | PICO 开发者平台&quot; description=&quot;空间锚点技术可以将虚拟环境中的位置与真实世界中的位置进行锚定。放置空间锚点并将其持久化至设备磁盘中后，用户再次走到放置锚点的位置时，系统可以找回该锚点并返回给应用。&quot; image=&quot;https://p9-arcosite.byteimg.com/tos-cn-i-goo7wpa0wc/2e96ba68be484bdc8e22457a6d5f2cf4~tplv-goo7wpa0wc-quality:q75.image&quot;}&lt;/p&gt;
+&lt;h2&gt;1.自身坐标的正确标定&lt;/h2&gt;
+&lt;p&gt;在开始应用空间锚点之前，我们需要先将自身的坐标真实确定，比如身高1.7m，在你头显里面的坐标也应该贴近(x,1.7,x)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;房间标定，&lt;a href=&quot;https://developer-cn.picoxr.com/document/unity/scene-capture/&quot;&gt;查看官方&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;地面标定，位于PICO头显的设置-安全防护-调整地面高度
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitysp2.webp&quot; alt=&quot;PICO地面高度标定&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;2.核心难点：多人开发的坐标系的统一与区分&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;每台PICO都有其独立的本地坐标系，而我们MR不同于VR的难点在于如何将两台及以上的坐标系统一起来；即虚拟坐标系（Coordinate System）统一到同一个物理参考系中&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;初期解决方法&lt;/strong&gt;&lt;/em&gt;：我们通过手动标定自己的原点（XZ）来完成虚拟与现实的统一，但是及其考研玩家的现实校准的地方的一致性，不方便；基本的核心原理都是将XROrigin置于一个根Root下进行变换
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitysp3.webp&quot; alt=&quot;XROrigin坐标系统一示意&quot; /&gt;
+&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;手动标定代码&amp;lt;/summary&amp;gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;    /// &amp;lt;summary&amp;gt;
+    /// 标定入口
+    /// &amp;lt;/summary&amp;gt;
+    public void OnCalibrateOriginPressed()
+    {
+        if (userCamera == null)
+        {
+            SetLogInfo(&quot;错误：无法找到用户相机，无法进行标定！&quot;);
+            return;
+        }
+
+        SetLogInfo(&quot;正在根据当前玩家位置标定共享原点...&quot;);
+
+        // 1. 获取玩家头显在地板上的投影位置（Y=0）
+        Vector3 headPositionOnFloor = new Vector3(userCamera.position.x, 0, userCamera.position.z);
+
+        // 2. 获取玩家头显的水平朝向（忽略俯仰和侧倾）
+        Quaternion headYawRotation = Quaternion.Euler(0, userCamera.eulerAngles.y, 0);
+
+        // 3. [核心] 调用对齐方法，传入我们计算出的、理想化的玩家姿态
+        //    这个方法会计算一个逆向变换，将这个姿态“拉回”到世界的(0,0,0)
+        AlignSharedSpaceOrigin(headPositionOnFloor, headYawRotation);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;    /// &amp;lt;summary&amp;gt;
+    /// 坐标系的统一变换
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name=&quot;targetPosition&quot;&amp;gt;目标位置&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name=&quot;targetRotation&quot;&amp;gt;目标旋转&amp;lt;/param&amp;gt;
+    private void AlignSharedSpaceOrigin(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        if (xrSharedSpaceOrigin == null)
+        {
+            Debug.LogError(&quot;XR Shared Space Origin 未在Inspector中指定，无法对齐坐标系！&quot;);
+            return;
+        }
+
+        // 计算将 targetPosition 和 targetRotation “拉回”到世界原点(0,0,0)所需的逆向变换
+        Quaternion inverseRotation = Quaternion.Inverse(targetRotation);
+        Vector3 inversePosition = inverseRotation * -targetPosition;
+
+        // 将这个逆向变换应用到玩家的根节点上
+        xrSharedSpaceOrigin.SetPositionAndRotation(inversePosition, inverseRotation);
+
+        SetLogInfo(&quot;共享原点已成功标定！&quot;);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;p&gt;以上的手动标定方案及其依赖双方对齐时的高度（因为这是是一个完全重设世界0点坐标系的过程），不精准，不稳定，只能作为开发过渡&lt;/p&gt;
+&lt;h2&gt;3.空间锚点基本&lt;/h2&gt;
+&lt;p&gt;对于空间锚点的基本应用（放置、持久化、销毁等）我的建议是多去研究上面那个官方基本文档，我这里碍于篇幅，只会提供不易发现，被垄断的部分，不过还是要注意以下几点核心&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;老老实实走PICO云端的方案，尽量不要尝试锚点数据走本地（因为其中的点云数据是加密的，解密成本高，不值）&lt;/li&gt;
+&lt;li&gt;锚点的主要传输依赖核心就是uuid，请在你的联机方案中重点聚焦于uuid的传输，放置、销毁、持久化均高度依赖uuid；&lt;/li&gt;
+&lt;li&gt;锚点的预制体一定要附带PXR_Spatial Anchor脚本&lt;/li&gt;
+&lt;li&gt;放置方面，更建议以手柄位置作为放置点，放置前的视觉预览体记得去掉（PXR_Spatial Anchor脚本）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4.共享空间锚点&lt;/h2&gt;
+&lt;h3&gt;1.流程&lt;/h3&gt;
+&lt;p&gt;流程建议为联机-放置共享空间锚点-下载客户端-同步
+&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;流程图&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sequenceDiagram
+    participant Host as 房主 (Host)
+    participant Server as PICO Cloud
+    participant Net as Network (RPC)
+    participant Client as 客户端 (Client)
+
+    Note over Host: 1. 放置 &amp;amp; 创建锚点
+    Host-&amp;gt;&amp;gt;Server: UploadSpatialAnchor
+    Server--&amp;gt;&amp;gt;Host: 返回 UUID
+    Host-&amp;gt;&amp;gt;Host: 记录 P_Host, Q_Host
+
+    Note over Client: 2. 新玩家加入 (OnNetworkSpawn)
+    Client-&amp;gt;&amp;gt;Host: RequestAnchorData (ServerRpc)
+    Host--&amp;gt;&amp;gt;Client: 发送 UUID, P_Host, Q_Host (ClientRpc)
+
+    Note over Client: 3. 对齐流程
+    Client-&amp;gt;&amp;gt;Server: Download (UUID)
+    Server--&amp;gt;&amp;gt;Client: 锚点数据
+    Client-&amp;gt;&amp;gt;Client: Locate (获取 P_Client)
+    Client-&amp;gt;&amp;gt;Client: 计算 Offset (忽略Y轴)
+    Client-&amp;gt;&amp;gt;Client: 移动 XR Origin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;h3&gt;2.详细解析&lt;/h3&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;详细解析&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主机创建&lt;/strong&gt;：房主记录下该锚点在自己坐标系下的位置 $P_{Host}$ 和旋转 $Q_{Host}$。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;客机加入&lt;/strong&gt;：通过 ClientRPC 拿到 $P_{Host}$ 与 $Q_{Host}$，然后再下载共享的空间锚点（已上传到云）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;加载锚点&lt;/strong&gt;：获取其在自己本地坐标系的位置 $P_{Client}$ 与旋转 $Q_{Client}$，然后经过数学矩阵变换后移动 XROrigin 的父物体 Root 节点即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;变换计算&lt;/strong&gt;：我们需要计算一个变换矩阵 $T_{Align}$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$P_{Host}, Q_{Host}$：锚点在&lt;strong&gt;房主&lt;/strong&gt;世界空间中的位置和旋转。&lt;/li&gt;
+&lt;li&gt;$P_{Client}, Q_{Client}$：锚点在&lt;strong&gt;客户端&lt;/strong&gt;本地空间中的位置和旋转（未校准前）。&lt;/li&gt;
+&lt;li&gt;$Q_{Align}$：给客户端的旋转矫正。&lt;/li&gt;
+&lt;li&gt;$P_{Align}$：给客户端的位置矫正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;旋转对齐&lt;/strong&gt;：对齐水平朝向（Yaw），&lt;strong&gt;必须忽略 X/Z 轴的倾斜&lt;/strong&gt;，以保证重力方向永远垂直向下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;1. 提取 Yaw 旋转&lt;/strong&gt;
+对于任一旋转四元数 $Q$，其 Forward 向量在水平面上的投影为：
+$\vec{F}&lt;em&gt;{projected} = \text{ProjectOnPlane}(Q \cdot \vec{Z}&lt;/em&gt;{forward}, \vec{Y}&lt;em&gt;{up})$
+提取后的 Yaw 旋转为：
+$Q&lt;/em&gt;{yaw} = \text{LookRotation}(\vec{F}&lt;em&gt;{projected}, \vec{Y}&lt;/em&gt;{up})$
+房主与客户端均这样处理，得到 $Q_{H_Yaw}$ 和 $Q_{C_Yaw}$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 计算旋转差值&lt;/strong&gt;
+需要一个旋转 $Q_{Align}$，使得客户端旋转后等于房主的旋转：
+$Q_{Align} \times Q_{C_Yaw} = Q_{H_Yaw}$
+推导得出：
+$Q_{Align} = Q_{H_Yaw} \times Q_{C_Yaw}^{-1}$&lt;/p&gt;
+&lt;p&gt;代码对应：
+&lt;code&gt;Quaternion rotAlign = hostRot * Quaternion.Inverse(clientRot);&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;位置对齐&lt;/strong&gt;：客户端锚点被父物体变换后，位置应等于房主锚点的位置。
+&lt;strong&gt;公式推导：&lt;/strong&gt;
+$P_{Host} = (Q_{Align} \times P_{Client}) + P_{Align}$
+其中 $Q_{Align} \times P_{Client}$ 是将客户端的锚点位置进行旋转矫正。
+需要求 $P_{Align}$，移项可得：
+$P_{Align} = P_{Host} - (Q_{Align} \times P_{Client})$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;代码对应：
+&lt;code&gt;Vector3 posAlign = hostPos - rotAlign * clientPos;&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;地面模式修正&lt;/strong&gt;：虽然公式中得出了一定的 Y 轴数学解，但通常由地面标定误差引起，且我们采用 &lt;code&gt;TrackingOriginMode.Floor&lt;/code&gt;，故丢弃 Y 轴偏移。
+公式对应：
+$P_{Align}.y = 0$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;代码对应：&lt;code&gt;posAlign.y = 0f;&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;玩家数据模拟&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;数学矩阵推演&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;房主锚点：$P_{host} = (2.0, 0.0, 3.0)$，朝向 Yaw = 30°&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;客户端锚点：$P_{client} = (3.0, 0.0, 2.0)$，朝向 Yaw = 10°&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Yaw 旋转矩阵&lt;/strong&gt;：
+$R_y(\theta) = \begin{bmatrix} \cos\theta &amp;amp; 0 &amp;amp; \sin\theta \ 0 &amp;amp; 1 &amp;amp; 0 \ -\sin\theta &amp;amp; 0 &amp;amp; \cos\theta \end{bmatrix}$
+房主为：$R_{\text{host}} = R_y(30^\circ) = \begin{bmatrix} 0.8660254 &amp;amp; 0 &amp;amp; 0.5 \ 0 &amp;amp; 1 &amp;amp; 0 \ -0.5 &amp;amp; 0 &amp;amp; 0.8660254 \end{bmatrix}$
+客户端为：$R_{\text{client}} = R_y(10^\circ) = \begin{bmatrix} 0.98480775 &amp;amp; 0 &amp;amp; 0.17364818 \ 0 &amp;amp; 1 &amp;amp; 0 \ -0.17364818 &amp;amp; 0 &amp;amp; 0.98480775 \end{bmatrix}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;旋转对齐矩阵&lt;/strong&gt;：
+$R_{\text{align}} = R_{\text{host}} R_{\text{client}}^{-1} \approx \begin{bmatrix} 0.939693 &amp;amp; 0 &amp;amp; 0.34202 \ 0 &amp;amp; 1 &amp;amp; 0 \ -0.34202 &amp;amp; 0 &amp;amp; 0.939693 \end{bmatrix}$&lt;/p&gt;
+&lt;p&gt;代码：&lt;code&gt;Quaternion rotAlign = hostRot * Quaternion.Inverse(clientRot);&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;平移向量 $P_{Align}$&lt;/strong&gt;：
+$R_{align}P_{client} \approx \begin{bmatrix} 0.939693 &amp;amp; 0 &amp;amp; 0.34202 \ 0 &amp;amp; 1 &amp;amp; 0 \ -0.34202 &amp;amp; 0 &amp;amp; 0.939693 \end{bmatrix} \begin{bmatrix} 3 \ 0 \ 2 \end{bmatrix} \approx \begin{bmatrix} 3.503118 \ 0 \ 0.853325 \end{bmatrix}$
+$P_{align} = P_{host} - R_{align}P_{client} \approx \begin{bmatrix} 2 \ 0 \ 3 \end{bmatrix} - \begin{bmatrix} 3.503118 \ 0 \ 0.853325 \end{bmatrix} \approx \begin{bmatrix} -1.503118 \ 0 \ 2.146675 \end{bmatrix}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;4×4 齐次变换矩阵 $T_{align}$&lt;/strong&gt;：
+$T_{\text{align}} = \begin{bmatrix} R_{\text{align}} &amp;amp; \mathbf{p}_{align} \ \mathbf{0}^\mathsf{T} &amp;amp; 1 \end{bmatrix} \approx \begin{bmatrix} 0.939693 &amp;amp; 0 &amp;amp; 0.34202 &amp;amp; -1.503118 \ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; 0 \ -0.34202 &amp;amp; 0 &amp;amp; 0.939693 &amp;amp; 2.146675 \ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;：经过 $T_{align}$ 变换后，客户端观测到的锚点将完美对齐到房主的位置。&lt;/p&gt;
+&lt;p&gt;代码实现：
+&lt;code&gt;xrSharedSpaceOrigin.SetPositionAndRotation(_currentAlignPos, _currentAlignRot);&lt;/code&gt;
+&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;h3&gt;3.详细代码（需要适配你的网络架构等我是NGO）&lt;/h3&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;具体代码&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    /// &amp;lt;summary&amp;gt;
+    /// 执行空间对齐算法
+    /// &amp;lt;/summary&amp;gt;
+    /// &amp;lt;param name=&quot;hostPos&quot;&amp;gt;房主发来的锚点世界坐标&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name=&quot;hostRot&quot;&amp;gt;房主发来的锚点世界旋转&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name=&quot;clientPos&quot;&amp;gt;客户端本地读取到的锚点坐标&amp;lt;/param&amp;gt;
+    /// &amp;lt;param name=&quot;clientRot&quot;&amp;gt;客户端本地读取到的锚点旋转&amp;lt;/param&amp;gt;
+    private void ApplyAlignment(Vector3 hostPos, Quaternion hostRot, Vector3 clientPos, Quaternion clientRot)
+    {
+        // 1. 提取 Yaw (保持重力垂直)
+        if (yawOnly)
+        {
+            hostRot   = ExtractYaw(hostRot);
+            clientRot = ExtractYaw(clientRot);
+        }
+        
+        // 2. 计算旋转偏移
+        Quaternion rotAlign = hostRot * Quaternion.Inverse(clientRot);
+
+        // 3. 计算位置偏移 (Host - Rot * Client)
+        Vector3 posAlign = hostPos - rotAlign * clientPos;
+
+        // 既然双方都是 Floor 模式，XR Origin 的 Y 轴必须与物理地面重合，也就是必须为 0。
+        // 任何 Y 轴的偏移都会导致玩家浮空或陷地。
+        // 我们完全忽略锚点在高度上的测量误差，只信任 X, Z 和 旋转。
+        posAlign.y = 0f;
+
+        // 4. 平滑应用
+        if (_hasCurrentAlign &amp;amp;&amp;amp; alignLerp &amp;lt; 1f)
+        {
+            _currentAlignRot = Quaternion.Slerp(_currentAlignRot, rotAlign, alignLerp);
+            _currentAlignPos = Vector3.Lerp(_currentAlignPos, posAlign, alignLerp);
+        }
+        else
+        {
+            _currentAlignRot = rotAlign;
+            _currentAlignPos = posAlign;
+            _hasCurrentAlign = true;
+        }
+
+        if (xrSharedSpaceOrigin != null)
+        {
+            xrSharedSpaceOrigin.SetPositionAndRotation(_currentAlignPos, _currentAlignRot);
+        }
+        
+        // 调试日志
+        float heightCorrection = hostPos.y - clientPos.y;
+        // 如果这个值很大（比如 &amp;gt; 0.2），说明其中一人的地面标定严重错误，需要重置系统边界
+        Debug.Log($&quot;[Align] 已强制锁定地面。忽略的高度误差: {heightCorrection:F3}m&quot;);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;h3&gt;4.辅助检验代码&lt;/h3&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;代码&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;using UnityEngine;
+using TMPro;
+using Unity.XR.PXR;
+using Unity.Netcode;
+
+public class DebugInfoManager : MonoBehaviour
+{
+    [Header(&quot;UI 设置&quot;)]
+    [Tooltip(&quot;拖入用于显示坐标信息的 TextMeshProUGUI&quot;)]
+    public TextMeshProUGUI debugText;
+
+    [Header(&quot;对象引用&quot;)]
+    public Transform headCamera;       // 拖入 Main Camera
+    public Transform xrOriginParent;   // 拖入 XR_SHARED_SPACE (XR Origin的父物体)
+
+    private void Update()
+    {
+        if (debugText == null) return;
+        if (headCamera == null) headCamera = Camera.main?.transform;
+
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+        // 1. 身份信息
+        string role = &quot;未连接&quot;;
+        if (NetworkManager.Singleton != null &amp;amp;&amp;amp; NetworkManager.Singleton.IsListening)
+        {
+            role = NetworkManager.Singleton.IsServer ? &quot;房主 (Host)&quot; : &quot;玩家 (Client)&quot;;
+        }
+        sb.AppendLine($&quot;身份: &amp;lt;color=yellow&amp;gt;{role}&amp;lt;/color&amp;gt;&quot;);
+
+        // 2. 关键坐标 (World)
+        // 如果这个 Y &amp;gt; 2.0，说明你被错误的对齐逻辑抬飞了
+        Vector3 worldPos = headCamera != null ? headCamera.position : Vector3.zero;
+        sb.AppendLine($&quot;World Head: {FormatVec(worldPos)}&quot;);
+
+        // 3. 本地坐标 (Local - 相对于 Origin)
+        // 正常站立时，Y 应该在 1.6 ~ 1.8 之间 (Floor模式)
+        Vector3 localPos = headCamera != null ? headCamera.localPosition : Vector3.zero;
+        sb.AppendLine($&quot;Local Head: {FormatVec(localPos)}&quot;);
+
+        // 4. 原点偏移 (XR Origin)
+        // Client 的 Y 必须是 0.00，如果不是，说明对齐逻辑错了
+        if (xrOriginParent != null)
+        {
+            sb.AppendLine($&quot;Origin Pos: {FormatVec(xrOriginParent.position)}&quot;);
+            sb.AppendLine($&quot;Origin Rot: {xrOriginParent.eulerAngles.y:F1}°&quot;);
+        }
+
+        // 5. 锚点误差监控 (从 Manager 获取)
+        if (PXRSample_SpatialAnchorManager.Instance != null &amp;amp;&amp;amp; PXRSample_SpatialAnchorManager.Instance.isCalibrated)
+        {
+            sb.AppendLine(&quot;&amp;lt;color=green&amp;gt;[已对齐]&amp;lt;/color&amp;gt;&quot;);
+        }
+        else
+        {
+            sb.AppendLine(&quot;&amp;lt;color=red&amp;gt;[未对齐]&amp;lt;/color&amp;gt;&quot;);
+        }
+
+        debugText.text = sb.ToString();
+    }
+
+    private string FormatVec(Vector3 v)
+    {
+        // X, Y, Z (保留2位小数)
+        return $&quot;({v.x:F2}, &amp;lt;color=#00FFFF&amp;gt;Y:{v.y:F2}&amp;lt;/color&amp;gt;, {v.z:F2})&quot;;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;h3&gt;5.简单的完美同步&lt;/h3&gt;
+&lt;p&gt;基本实现：现实=虚拟，虚实合一&lt;/p&gt;
+&lt;p&gt;&amp;lt;u&amp;gt;&lt;strong&gt;请注意房主再放置锚点后要细细观察锚点周围的空间，尽量保持平稳角度，确保上传是缓慢进行的，一般一下子上传完成均不准；客户端在确认房主上传完毕后请仔细以房主视角观察&lt;/strong&gt;&amp;lt;/u&amp;gt;&lt;/p&gt;
+&lt;p&gt;::link{url=&quot;https://unity-web2.vercel.app&quot; title=&quot;Spatial Alignment Visualizer&quot; description=&quot;空间锚点对齐算法的交互式可视化演示工具，帮助理解坐标系变换原理。访问密码：pico&quot;}&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unitysp4.webp&quot; alt=&quot;空间锚点对齐效果演示&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>Antigravity登陆FAQ解决方法！</title><link>https://wsunskyr.github.io/posts/antigravity-login/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/antigravity-login/</guid><description>解决 Antigravity 登录时出现 FAQ 错误的完整指南。排查节点质量、账号国家归属地问题，以及网页端提示成功但仍显示 FAQ 的终极解决方案，帮助你顺利使用 Gemini AI 服务。</description><pubDate>Sun, 28 Dec 2025 12:16:50 GMT</pubDate><content:encoded>&lt;h2&gt;首先我们要确保你的账号问题不是出自以下方面&lt;/h2&gt;
+&lt;h2&gt;节点问题&lt;/h2&gt;
+&lt;p&gt;请确保你的节点干净一点，不要是很差的
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity1.webp&quot; alt=&quot;Antigravity节点质量检查示例&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;账号国家归属地问题&lt;/h2&gt;
+&lt;p&gt;请确保你的账号国家归属地为Antigravity支持的地区&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://policies.google.com/terms?hl=zh_CN&quot;&gt;查看你的账号地区&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;出现网页端提示成功，但FAQ&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity3.webp&quot; alt=&quot;Antigravity网页端登录成功提示&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity2.webp&quot; alt=&quot;Antigravity FAQ错误页面截图&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;FAQ解决方法&lt;/h2&gt;
+&lt;h2&gt;原作者项目&lt;/h2&gt;
+&lt;p&gt;::github{repo=&quot;lbjlaq/Antigravity-Manager&quot;}&lt;/p&gt;
+&lt;h2&gt;解决效果&lt;/h2&gt;
+&lt;p&gt;这个强大的插件可以帮助我们实现FAQ登陆不了的问题，实测完美解决！！
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity5.webp&quot; alt=&quot;Antigravity Manager解决FAQ后成功登录界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;解决步骤&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;按照源项目完成下载后，直接添加账号选择OAuth授权登陆即可，登陆完成则出现
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity4.webp&quot; alt=&quot;Antigravity Manager OAuth授权登录成功界面&quot; /&gt;&lt;/li&gt;
+&lt;li&gt;然后直接选择从该工具页面切换账号启动Antigravity即可，如果是已经启动了Antigravity则按照提示，选择关闭即可（不要选择重启）
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity5.webp&quot; alt=&quot;Antigravity Manager切换账号启动操作界面&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;项目极其强大的另一点&lt;/h2&gt;
+&lt;p&gt;项目不仅可以完美解决我们的FAQ登录问题，还可以让我们一键开启API反代服务，让我们的Antigravity可以使用的模型完美转化为外部接口，具体功能还请大家自行尝试
+&lt;img src=&quot;https://wsunskyr.github.io/images/Antigravity6.webp&quot; alt=&quot;Antigravity Manager API反代服务功能界面&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>GeminiCLI账号切换插件，让你的开发之路不在繁琐！</title><link>https://wsunskyr.github.io/posts/geminiclimanager/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/geminiclimanager/</guid><description>最近Unity项目开始庞大了，单一的网页交互式AI开发效率远不如编译器内AI，但是我都没拿到钱也不想使用CluadeCode;诶,送了我n个学生Pro的Google大善人又发力了！</description><pubDate>Sun, 21 Dec 2025 22:00:16 GMT</pubDate><content:encoded>&lt;h1&gt;项目地址&lt;/h1&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/Gemini-CLI-Auth-Manager&quot;}&lt;/p&gt;
+&lt;h1&gt;为什么突然想要使用GeminiCLI以及要编写这个插件呢？&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;项目仍未带给我个人实际收益，不值得使用付费的ClaudeCode&lt;/li&gt;
+&lt;li&gt;项目内容越来越大，单一Web对话式AI已经很难在有限上下文下保持高开发效率了，不如使用“嵌入”式AI&lt;/li&gt;
+&lt;li&gt;Google大善人给了我n个AI Pro账号，在工作室电脑犯病登不上Antigravity的情况下，GeminiCLI同样对AI Pro用户有更高的额度供我使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;那为什么突然想到要开发这个插件呢？&lt;/h1&gt;
+&lt;h2&gt;1.Unity开发整体消耗较大&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;昨天一下午与Gemini共同燃烧了一下午修复遗留的奇妙BUG，结束后看到了消耗的Token高达百万，以及请求次数也很多（包括整体的第一次项目初始化）让我不得不担心一个账号的额度是否足够我一个人一天的开发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2.账号切换麻烦&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;账号的默认切换方式只有/auth然后再选择登录其他账号，不保证哪次登录又需要验证码了；很浪费时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;最后使用效果&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;如图所示，切换丝滑
+&lt;img src=&quot;https://wsunskyr.github.io/images/geminicli2.webp&quot; alt=&quot;GeminiCLI账号切换效果&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded></item><item><title>Unity自定义添加模块</title><link>https://wsunskyr.github.io/posts/unity-module/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/unity-module/</guid><description>Unity Hub 无法添加模块的解决方案。通过 Unity 官方下载存档手动安装 Android、iOS 等平台模块，以及中文语言包和文档的正确安装路径配置，完美解决模块缺失问题。</description><pubDate>Tue, 02 Dec 2025 20:08:07 GMT</pubDate><content:encoded>&lt;h2&gt;UnityHub安装Unity时手动添加模块&lt;/h2&gt;
+&lt;p&gt;有些情况下，我们即使使用了正确的安装量设置等，但UnityHub在安装Unity时，仍然会出现没有“添加模块”这个选项的情况，如下图所示：
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod0.webp&quot; alt=&quot;UnityHub缺少添加模块选项的问题截图&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;这个时候我们可以通过以下步骤手动添加模块：&lt;/p&gt;
+&lt;h2&gt;1.打开Unity下载页面，选择“下载存档”&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod1.webp&quot; alt=&quot;Unity官网下载存档页面入口&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;2.在存档页面选择对应的Unity版本，选择下载的“See all”（即查看所有）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod2.webp&quot; alt=&quot;Unity存档页面选择See all查看所有组件&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;3.在对应版本页面，选择Componment installers（组件管理器）下的需要的模块进行下载&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod3.webp&quot; alt=&quot;Unity Component installers组件下载列表&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;4.下载完成后，运行对应的模块安装程序，选择Unity的安装路径进行安装&lt;/h2&gt;
+&lt;p&gt;例如我的安装路径为E:\UnityEditor\2022.3.62f2\Editor&lt;/p&gt;
+&lt;p&gt;Unity对应版本\Editor
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod4.webp&quot; alt=&quot;Unity模块安装程序选择安装路径&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;5.安装中文模块与文档需要安装在Editor/Data下&lt;/h2&gt;
+&lt;p&gt;文档解压到Editor/Data下即可；中文模块为Localization文件夹，解压到Editor/Data下即可（就是zh-hans.po），官方找不到就搜索下载
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod4.webp&quot; alt=&quot;Unity中文语言包安装路径说明&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod5.webp&quot; alt=&quot;Unity Editor Data目录结构截图&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;6.完成后重启Unity即可&lt;/h2&gt;
+&lt;p&gt;如果出现问题，可以尝试重新安装模块，或者检查（）路径是否正确，以及手动下载（例如OpenJDK（安卓打包组件））
+&lt;img src=&quot;https://wsunskyr.github.io/images/unitymod6.webp&quot; alt=&quot;Unity模块安装完成后的编辑器界面&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>Rider与VisualStudio的中文注释编码的爱恨情仇（转换兼容）</title><link>https://wsunskyr.github.io/posts/rider-visualstudio-zhcn/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/rider-visualstudio-zhcn/</guid><description>最近与团队合作开发Unity项目时发现Rider与VisualStudio在中文注释编码上存在不兼容问题，导致代码注释乱码；本文记录了解决该问题的过程与方法。</description><pubDate>Sat, 25 Oct 2025 12:32:34 GMT</pubDate><content:encoded>&lt;h2&gt;事情的起因&lt;/h2&gt;
+&lt;p&gt;团队合作开发Unity项目时，一开始我单人使用Rider编写，但是后来的所有人都是使用VisualStudio，结果在代码注释中出现了乱码问题。所以我决定我去适配其他人，完成中文转换&lt;/p&gt;
+&lt;h2&gt;在Visual Studio中，我们编写图中带有中文的代码及注释&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv1.webp&quot; alt=&quot;Visual Studio中编写的中文注释代码示例&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;但是切换为Rider后，中文注释就变成了乱码&lt;/h3&gt;
+&lt;h3&gt;Unity中视图&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv2.webp&quot; alt=&quot;Unity编辑器中显示的中文乱码问题&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;Rider中视图&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv4.webp&quot; alt=&quot;Rider中显示的中文注释乱码问题&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;原因分析&lt;/h2&gt;
+&lt;p&gt;经过一番查找，发现这是由于Rider默认使用UTF-8编码，而Visual Studio使用的是GBK编码，导致中文注释无法正确显示，需要进行编码转换故我们选择进行重载，注意一定要选择&amp;lt;span style=&quot;color: red; font-weight: bold;&quot;&amp;gt;重新加载！&amp;lt;/span&amp;gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/rv5.webp&quot; alt=&quot;Rider文件编码重新加载操作界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;然后发现Rider重新加载后，中文注释就能正确显示了&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv6.webp&quot; alt=&quot;Rider重新加载后中文注释正确显示&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;A.为了一劳永逸，我们可以在Rider中设置项目编码为GBK，避免每次打开文件都需要重新加载&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv3.webp&quot; alt=&quot;Rider项目编码设置为GBK配置界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;B.使用更为统一的UTF-8（带BOM）编码，这样我们很多正常编译器均支持（推荐）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv8.webp&quot; alt=&quot;Rider设置UTF-8带BOM编码配置界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;最后均可正常显示中文注释&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rv7.webp&quot; alt=&quot;Rider和Visual Studio中文注释兼容成功显示&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>解决Cloudflare搭建的图床跨域问题</title><link>https://wsunskyr.github.io/posts/imagebed-cors/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/imagebed-cors/</guid><description>我博客的随机图是采用了搭建于Cloudflare的Cloudflare-Imgbed图床,但是由于安全策略,导致跨域问题,本文介绍了如何解决这个问题.</description><pubDate>Sun, 12 Oct 2025 18:31:33 GMT</pubDate><content:encoded>&lt;h1&gt;1. 问题描述&lt;/h1&gt;
+&lt;p&gt;最近在观察博客的控制台时发现有跨域问题,如下图所示:
+&lt;img src=&quot;https://wsunskyr.github.io/images/errimgbed.webp&quot; alt=&quot;图床跨域错误截图&quot; /&gt;&lt;/p&gt;
+&lt;h1&gt;2. 问题解决方法&lt;/h1&gt;
+&lt;p&gt;对于这个我们只需要前往Cloudflare的控制面板,修改我们的规则即可&lt;/p&gt;
+&lt;h2&gt;修改响应标头转换规则（Response Header Transform Rules）&lt;/h2&gt;
+&lt;p&gt;前往Cloudflare的控制面板,选择你的域名,然后选择&quot;规则&quot;-&amp;gt;&quot;概述&quot;-&amp;gt;&quot;响应标头转换规则&quot;,如下图所示:
+&lt;img src=&quot;https://wsunskyr.github.io/images/imgbedrule1.webp&quot; alt=&quot;Cloudflare响应标头转换规则入口&quot; /&gt;
+然后如图依次添加以下标头以及其对应值，以及主机名=你的图床域名&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Access-Control-Allow-Headers - *&lt;/li&gt;
+&lt;li&gt;Access-Control-Allow-MethodsAccess-Control-Allow-Methods - GET, HEAD, OPTIONS&lt;/li&gt;
+&lt;li&gt;Access-Control-Allow-Origin - *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/imgbedrule2.webp&quot; alt=&quot;Cloudflare标头配置示例&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>国内使用Gemini的官方模型</title><link>https://wsunskyr.github.io/posts/openwebuieoai/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/openwebuieoai/</guid><description>通过EdgeOne的AI网关在国内免魔法安全访问Gemini官方模型，配合OpenWebUI实现超快速度的AI对话体验，包含完整配置步骤和自开发Pipe插件。</description><pubDate>Wed, 08 Oct 2025 17:37:02 GMT</pubDate><content:encoded>&lt;h2&gt;通过EdgeOne的AI网关安全使用Gemini的官方模型&lt;/h2&gt;
+&lt;h3&gt;&lt;strong&gt;是否苦恼于具有Gemini的免费层级的API Key但是无法在国内使用？以及搭建中转服务器价格过于高昂？今天给大家带来一个新的解决方案，使用EdgeOne的AI网关来访问Gemini的官方模型&lt;/strong&gt;&lt;/h3&gt;
+&lt;h2&gt;使用EdgeOne的AI网关的访问速度（国内）&lt;/h2&gt;
+&lt;p&gt;这个速度可以说是比我们开启魔法或中转都要快，并且是官方模型，以下是AI网关的访问速度
+&lt;img src=&quot;https://wsunskyr.github.io/images/eoaiurl.webp&quot; alt=&quot;EdgeOne AI网关访问速度测试结果&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;1.获得AI Studio的API Key(Gemini官方且具有免费层级)&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://aistudio.google.com/&quot;&gt;AI Studio&lt;/a&gt;请开启&lt;strong&gt;魔法&lt;/strong&gt;进入&lt;/p&gt;
+&lt;p&gt;或者你已经具有自己的Gemini API Key也可以&lt;/p&gt;
+&lt;h2&gt;2.注册EdgeOne并创建AI网关，进入该界面选择Gemini AI&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/eoaiurlgs.webp&quot; alt=&quot;EdgeOne AI网关配置界面选择Gemini AI&quot; /&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+记住以下内容&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OE Key（请求头模板对应值）&lt;/li&gt;
+&lt;li&gt;Gateway Name（请求头模板对应值）&lt;/li&gt;
+&lt;li&gt;OE-AI-Provider（请求头模板对应值）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;3.使用OpenWebUI来访问&lt;/h2&gt;
+&lt;h3&gt;3.1.进入OpenWebUI的函数页面来下载我的Pipe&lt;/h3&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/OpenWebUI-EdgeOne-AI-Gemini&quot;}&lt;/p&gt;
+&lt;p&gt;安装链接&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/Besty0728/OpenWebUI-EdgeOne-AI-Gemini/blob/main/edgeone_ai.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;3.2.安装后进行配置&lt;/h3&gt;
+&lt;p&gt;对照上面的信息进行填写&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义API请求地址（例：https://ai-gateway.eo-edgefunctions7.com/v1）&lt;/li&gt;
+&lt;li&gt;你的 API Key（使用负载均衡则使用,隔开）&lt;/li&gt;
+&lt;li&gt;模型名称（多个模型使用英文逗号,隔开）&lt;/li&gt;
+&lt;li&gt;OE Key（请求头模板对应值）&lt;/li&gt;
+&lt;li&gt;Gateway Name（请求头模板对应值）&lt;/li&gt;
+&lt;li&gt;OE-AI-Provider（请求头模板对应值）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3.3.开启后对话效果，十分迅速！&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/eoopenwebuispeed.webp&quot; alt=&quot;OpenWebUI通过EdgeOne访问Gemini的对话速度展示&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;4.新更新：增加3系列支持、优化思维链、支持附加API调节特有信息&lt;/h2&gt;
+&lt;h3&gt;4.1.配置页面优化&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/eoopenwebuisetting.webp&quot; alt=&quot;EdgeOne Gemini Pipe配置页面界面&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;4.2.支持思维链&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/eoopenwebui1.webp&quot; alt=&quot;Gemini思维链功能展示-输入&quot; /&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/eoopenwebui2.webp&quot; alt=&quot;Gemini思维链功能展示-输出&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;4.3.支持附加API调节特有信息&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/eoopenwebui3.webp&quot; alt=&quot;Gemini API附加参数调节设置界面&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>关于在OpenWebUI中处理Base64返回的图片</title><link>https://wsunskyr.github.io/posts/openwebui-base-image/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/openwebui-base-image/</guid><description>OpenWebUI 处理 Base64 图片的函数插件安装与配置教程。解决 AI 绘图模型返回 Base64 编码而非图片链接的问题，支持自定义 API 地址、密钥、模型 ID 和计费参数设置。</description><pubDate>Wed, 01 Oct 2025 17:59:24 GMT</pubDate><content:encoded>&lt;p&gt;::github{repo=&quot;Besty0728/OpenWebUI-Base64-Image&quot;}&lt;/p&gt;
+&lt;h1&gt;关于在OpenWebUI中处理Base64返回的图片&lt;/h1&gt;
+&lt;h2&gt;1.打开OpenWebUI的函数界面直接选择从新连接链接&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/Besty0728/OpenWebUI-Base64-Image/blob/main/image_decoder_pipe.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2.安装完成后填写对应的参数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;API基础URL：自定义请求模型供应商地址&lt;/li&gt;
+&lt;li&gt;API Key：自定义请求模型供应商的Key&lt;/li&gt;
+&lt;li&gt;模型ID：自定义请求模型供应商的模型名称&lt;/li&gt;
+&lt;li&gt;每次生成费用（元）：自定义请求模型供应商单次生成费用（可配合计费插件使用）&lt;/li&gt;
+&lt;li&gt;请求超时时间（秒）：自定义请求模型供应商的请求超时时间（等待图片）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;完成后效果如下
+&lt;img src=&quot;https://wsunskyr.github.io/images/baseimage1.webp&quot; alt=&quot;Base64图片处理效果&quot; /&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/baseimage2.webp&quot; alt=&quot;Base64图片解码结果&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>使用云应用无服务器部署OpenWebUI</title><link>https://wsunskyr.github.io/posts/openwebuinoserver/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/openwebuinoserver/</guid><description>零服务器运维成本部署 OpenWebUI 完整教程。使用雨云云应用商店一键部署，配合 Cloudflare DNS 和端口转发规则实现自定义域名访问，轻松搭建私有 AI 对话平台。</description><pubDate>Wed, 01 Oct 2025 12:21:05 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://www.bilibili.com/video/BV1CGHJzaEor/&quot;&gt;视频链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.rainyun.com/star666_&quot;&gt;雨云注册链接&lt;/a&gt;优惠码：&lt;code&gt;star666&lt;/code&gt;&lt;/p&gt;
+&lt;h1&gt;今天给大家带来无服务器部署OpenWebUI&lt;/h1&gt;
+&lt;h1&gt;雨云云应用商店选择OpenWebUI&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rainopenwebui1.webp&quot; alt=&quot;雨云云应用商店选择OpenWebUI&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;然后选择创建即可，核心与内存建议2h2g，记住你的端口号（后续域名访问要用）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/rainopenwebui.webp&quot; alt=&quot;雨云创建OpenWebUI实例&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;稍作等待，等你的公网ip+端口可访问后我们进入域名配置访问&lt;/h2&gt;
+&lt;h1&gt;Cloudflare配置域名访问&lt;/h1&gt;
+&lt;h2&gt;1.先去DNS配置，采取a记录，将你需要访问的域名（例：aiweb.cloudrunmax.top）;名称则为aiweb、解析内容为公网ip&lt;/h2&gt;
+&lt;h2&gt;2.配置端口转发规则，来到规则页面选择Origin Rules&lt;/h2&gt;
+&lt;h3&gt;名称随意，如下填写为：域名/*&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/openwebuicf1.webp&quot; alt=&quot;Cloudflare Origin Rules配置&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;传入端口则为上文你公网ip访问后的端口号&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/openwebuicf2.webp&quot; alt=&quot;Cloudflare端口转发设置&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;3.配置完成均激活后访问即可成功&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/openwebuidomain.webp&quot; alt=&quot;域名访问成功&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>关于如何在OpenWebUI中启用OpenAI的responses端点的模型</title><link>https://wsunskyr.github.io/posts/openwebui-responses/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/openwebui-responses/</guid><description>最近发现OpenWebUI尚未支持OpenAI的新responses端点模型，（Cloudflare提供的OSS模型以及官方O系列模型）社区解决方案如下，但不能完美解决，故自己写了一个更好的解决方案</description><pubDate>Sun, 21 Sep 2025 17:50:42 GMT</pubDate><content:encoded>&lt;p&gt;::github{repo=&quot;Besty0728/OpenWebUI-Cloudflare-OSS&quot;}&lt;/p&gt;
+&lt;h2&gt;关于如何在OpenWebUI中启用官方OpenAI的responses端点的模型&lt;/h2&gt;
+&lt;h3&gt;1.官方端点我们采用了社区关于responses端点的解决方案（实测正常使用官方端点）&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/jrkropp/open-webui-developer-toolkit/tree/main/functions/pipes/openai_responses_manifold&quot;&gt;社区解决方案链接&lt;/a&gt;
+先按照社区文档的步骤进行操作，安装这个Pipe；安装链接如下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/jrkropp/open-webui-developer-toolkit/blob/main/functions/pipes/openai_responses_manifold/openai_responses_manifold.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装后需要我们对此Pipe进行一些修改，主要是修改你要请求的端点以及模型等
+&lt;img src=&quot;https://wsunskyr.github.io/images/OPRmanager.webp&quot; alt=&quot;OpenWebUI Pipe管理配置界面&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;2.调用Cloudflare的OSS模型，采用我的Pipe&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://developers.cloudflare.com/changelog/2025-08-05-openai-open-models/&quot;&gt;Cloudflare OSS模型调用文档&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;1.首先你需要去Cloudflare注册一个账号，然后创建一个API Token、获得你的账户ID，获得方法如图&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;账户ID获得方法
+&lt;img src=&quot;https://wsunskyr.github.io/images/CFAI1.webp&quot; alt=&quot;Cloudflare账户ID获取位置截图&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建API Token，选择后续的WorkerAI模板即可
+&lt;img src=&quot;https://wsunskyr.github.io/images/CFAI2.webp&quot; alt=&quot;Cloudflare API Token创建步骤截图&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建完成后你会获得一个API Token，复制保存好&lt;/p&gt;
+&lt;h3&gt;2.然后我们安装我开发的Pipe&lt;/h3&gt;
+&lt;p&gt;::github{repo=&quot;Besty0728/OpenWebUI-Cloudflare-OSS&quot;}&lt;/p&gt;
+&lt;h4&gt;安装链接&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;https://github.com/Besty0728/OpenWebUI-Cloudflare-OSS/blob/main/cloudflare_responses.py
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Cloudflare Account ID处填写你刚才获得的账户ID&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API Key处填写你刚才创建的API Token&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型名称处填写你要调用的模型名称，例如本次的&lt;code&gt;@cf/openai/gpt-oss-120b&lt;/code&gt;，如果你要调用其他模型请参考Cloudflare的文档（以上只适用于responses端点的模型）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;填入如图&lt;/strong&gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/OWCF.webp&quot; alt=&quot;OpenWebUI Cloudflare OSS Pipe配置填写示例&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;3.最后别忘了启用该Pipe，以及某些模型的特定修改&lt;/h3&gt;
+&lt;p&gt;例如本文的Cloudflare的OSS模型需要我们在参数处选择禁用&lt;code&gt;Stream Chat Response&lt;/code&gt;（流式对话响应/流式输出；因为CF不支持流式输出调用该模型；也可以选择不修改，因为我的Pipe禁用了）
+&lt;img src=&quot;https://wsunskyr.github.io/images/OSSSetting.webp&quot; alt=&quot;OpenWebUI模型参数设置禁用流式输出&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;4.完成后即可愉快使用&lt;/h3&gt;
+&lt;p&gt;实测支持OpenWebUI的联网工具等
+&lt;img src=&quot;https://wsunskyr.github.io/images/OP-OSS.webp&quot; alt=&quot;OpenWebUI使用Cloudflare OSS模型对话效果展示&quot; /&gt;&lt;/p&gt;
+</content:encoded></item><item><title>我的ClaudeCode使用笔记</title><link>https://wsunskyr.github.io/posts/claudecode/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/claudecode/</guid><description>Claude Code 实用指南与技巧汇总。涵盖安装配置、核心命令、MCP模块、子智能体、Hooks钩子、Skills技能系统、自定义命令等完整使用笔记，助你高效使用 AI 编程助手。</description><pubDate>Sat, 20 Sep 2025 19:33:12 GMT</pubDate><content:encoded>&lt;h1&gt;ClaudeCode使用笔记&lt;/h1&gt;
+&lt;h2&gt;📌 概述&lt;/h2&gt;
+&lt;p&gt;Claude Code 是 Anthropic 推出的 &lt;strong&gt;AI 智能编程工具&lt;/strong&gt;，可在终端、IDE、桌面应用和浏览器中运行。它能直接读取代码库、执行命令、修改文件、管理 Git 工作流，并通过 MCP 协议连接外部服务。&lt;/p&gt;
+&lt;h2&gt;文档目录&lt;/h2&gt;
+&lt;h2&gt;🧭ClaudeCode官方文档&lt;/h2&gt;
+&lt;p&gt;有空更建议研究ClaudeCode官方文档&lt;/p&gt;
+&lt;p&gt;::link{url=&quot;https://docs.claude.com/zh-CN/docs/claude-code/overview&quot; title=&quot;Claude Code 概述 - Claude Docs&quot; description=&quot;Claude Code 官方中文文档&quot;}&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🚀 安装与认证&lt;/h2&gt;
+&lt;h3&gt;安装方式&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# macOS / Linux / WSL（推荐原生安装）
+curl -fsSL https://claude.ai/install.sh | bash
+
+# Windows 安装（Powershell）
+irm https://claude.ai/install.ps1 | iex
+
+# 更新到最新版本
+claude update
+
+# 健康检查
+claude doctor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;&lt;strong&gt;Setting.Json解析，个人开发适用&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;键值与结构体&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;&lt;code&gt;cleanupPeriodDays&lt;/code&gt;&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;非活动时间超过此期间的会话在启动时被删除。设置为 &lt;strong&gt;&lt;code&gt;0&lt;/code&gt;&lt;/strong&gt; 立即删除所有会话。（默认：30 天）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;model&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;覆盖 Claude Code 使用的默认模型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;alwaysThinkingEnabled&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;为所有会话默认启用 &lt;a href=&quot;https://code.claude.com/docs/zh-CN/common-workflows#use-extended-thinking-thinking-mode&quot;&gt;&lt;strong&gt;扩展思考&lt;/strong&gt;&lt;/a&gt; ，默认开启&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;autoUpdatesChannel&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;配置 Claude Code 为自动更新 默认为**&lt;code&gt;latest&lt;/code&gt;** ，可改为**&lt;code&gt;stable&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;statusLine&lt;/code&gt; 结构体&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;配置自定义状态行以显示上下文。请参阅 &lt;a href=&quot;https://code.claude.com/docs/zh-CN/statusline&quot;&gt;&lt;strong&gt;&lt;code&gt;statusLine&lt;/code&gt; 文档&lt;/strong&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;attribution&lt;/code&gt; 结构体&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;是否在 git 提交和拉取请求中包含 &lt;strong&gt;&lt;code&gt;co-authored-by Claude&lt;/code&gt;&lt;/strong&gt; 署名，默认开启&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;defaultMode&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;打开 Claude Code 时的默认&lt;a href=&quot;https://code.claude.com/docs/zh-CN/permissions#permission-modes&quot;&gt;**权限模式&lt;/a&gt;** 建议为&lt;strong&gt;plan&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;环境变量&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;&lt;code&gt;ANTHROPIC_AUTH_TOKEN&lt;/code&gt;&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;&lt;code&gt;Authorization&lt;/code&gt;&lt;/strong&gt; 标头的自定义值（您在此处设置的值将以 &lt;strong&gt;&lt;code&gt;Bearer&lt;/code&gt;&lt;/strong&gt; 为前缀）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;ANTHROPIC_BASE_URL&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;自定义请求端点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;CLAUDE_AUTOCOMPACT_PCT_OVERRIDE&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;设置触发自动压缩的上下文容量百分比（1-100）。默认情况下，自动压缩在约 95% 容量时触发。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;提示建议，设置为**&lt;code&gt;flase&lt;/code&gt;** 禁用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;CLAUDE_CODE_MAX_OUTPUT_TOKENS&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;为大多数请求设置最大输出令牌数。默认：32,000。最大：64,000。增加此值会减少在 &lt;a href=&quot;https://code.claude.com/docs/zh-CN/costs#reduce-token-usage&quot;&gt;&lt;strong&gt;自动压缩&lt;/strong&gt;&lt;/a&gt; 触发之前可用的有效上下文窗口。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;覆盖文件读取的默认令牌限制。当您需要完整读取较大文件时很有用默认为**&lt;code&gt;16000&lt;/code&gt;&lt;strong&gt;，最大&lt;/strong&gt;&lt;code&gt;100000&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;MAX_THINKING_TOKENS&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;思考预算，默认为31999（最大）0为禁用，Opus4.6由努力级别控制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;MCP_TIMEOUT&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;MCP 服务器启动的超时 建议**&lt;code&gt;60000&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;MCP_TOOL_TIMEOUT&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;MCP 工具执行的超时 建议**&lt;code&gt;120000&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;BASH_DEFAULT_TIMEOUT_MS&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;长时间运行的 bash 命令的默认超时 建议**&lt;code&gt;300000&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;BASH_MAX_TIMEOUT_MS&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;模型可以为长时间运行的 bash 命令设置的最大超时 建议**&lt;code&gt;600000&lt;/code&gt;**&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;CLAUDE_CODE_EFFORT_LEVEL&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Opus4.6加入的控制努力级别 值：&lt;strong&gt;&lt;code&gt;low&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;medium&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;high&lt;/code&gt;&lt;/strong&gt;（默认）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;个人配置示例（2026.1.31）&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;p&gt;补充：关于我的StatusLine，需要先安装依赖：&lt;code&gt;npx ccstatusline@latest&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/sirmalloc/ccstatusline&quot;&gt;GitHub - sirmalloc/ccstatusline: 🚀 Beautiful highly customizable statusline for Claude Code CLI with powerline support, themes, and more.&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;alwaysThinkingEnabled&quot;: true,
+  &quot;attribution&quot;: {
+    &quot;commit&quot;: &quot; &quot;,
+    &quot;pr&quot;: &quot; &quot;
+  },
+  &quot;autoUpdatesChannel&quot;: &quot;latest&quot;,
+  &quot;defaultMode&quot;: &quot;plan&quot;,
+  &quot;enabledPlugins&quot;: {
+    &quot;context7@claude-plugins-official&quot;: true,
+    &quot;csharp-lsp@claude-plugins-official&quot;: true,
+    &quot;document-skills@anthropic-agent-skills&quot;: true,
+    &quot;example-skills@anthropic-agent-skills&quot;: true,
+    &quot;frontend-design@claude-plugins-official&quot;: true
+  },
+  &quot;env&quot;: {
+    &quot;ANTHROPIC_AUTH_TOKEN&quot;: &quot;你的APIKey&quot;,
+    &quot;ANTHROPIC_BASE_URL&quot;: &quot;自定义端点&quot;,
+    &quot;BASH_DEFAULT_TIMEOUT_MS&quot;: &quot;300000&quot;,
+    &quot;BASH_MAX_TIMEOUT_MS&quot;: &quot;600000&quot;,
+    &quot;CLAUDE_AUTOCOMPACT_PCT_OVERRIDE&quot;: &quot;70&quot;,
+    &quot;CLAUDE_CODE_ATTRIBUTION_HEADER&quot;: &quot;0&quot;,
+    &quot;CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC&quot;: &quot;1&quot;,
+    &quot;CLAUDE_CODE_FILE_READ_MAX_OUTPUT_TOKENS&quot;: &quot;32000&quot;,
+    &quot;CLAUDE_CODE_MAX_OUTPUT_TOKENS&quot;: &quot;52000&quot;,
+    &quot;DISABLE_AUTOUPDATER&quot;: &quot;1&quot;,
+    &quot;DISABLE_ERROR_REPORTING&quot;: &quot;1&quot;,
+    &quot;DISABLE_TELEMETRY&quot;: &quot;1&quot;,
+    &quot;MAX_THINKING_TOKENS&quot;: &quot;31999&quot;,
+    &quot;MCP_TIMEOUT&quot;: &quot;60000&quot;,
+    &quot;MCP_TOOL_TIMEOUT&quot;: &quot;120000&quot;
+  },
+  &quot;model&quot;: &quot;opusplan&quot;,
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Read&quot;,
+      &quot;Glob&quot;,
+      &quot;Grep&quot;,
+      &quot;Bash(npm run:*)&quot;,
+      &quot;Bash(pnpm run:*)&quot;,
+      &quot;Bash(npx:*)&quot;,
+      &quot;Bash(node:*)&quot;,
+      &quot;Bash(git:*)&quot;,
+      &quot;Bash(dotnet:*)&quot;,
+      &quot;Bash(msbuild:*)&quot;,
+      &quot;Bash(python:*)&quot;,
+      &quot;Bash(uv:*)&quot;,
+      &quot;Bash(pip:*)&quot;,
+      &quot;Bash(pytest:*)&quot;,
+      &quot;Bash(where:*)&quot;,
+      &quot;Bash(dir:*)&quot;,
+      &quot;Bash(type:*)&quot;,
+      &quot;Bash(echo:*)&quot;,
+      &quot;Edit(src/**)&quot;,
+      &quot;Edit(tests/**)&quot;,
+      &quot;Edit(Assets/Scripts/**)&quot;,
+      &quot;Edit(Assets/Editor/**)&quot;
+    ],
+    &quot;deny&quot;: []
+  },
+  &quot;statusLine&quot;: {
+    &quot;command&quot;: &quot;ccstatusline&quot;,
+    &quot;type&quot;: &quot;command&quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;h2&gt;认证&lt;/h2&gt;
+&lt;p&gt;请在启动前在你的***.claude.json***里面添加这行，即&lt;code&gt;hasCompletedOnboarding&lt;/code&gt; 的值为true&lt;/p&gt;
+&lt;p&gt;或者使用CC-Switch里面设置跳过首次登陆即可&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&quot;hasCompletedOnboarding&quot;: true,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🎯 核心 CLI 命令&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;claude&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启动交互式 REPL 会话&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;claude&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;claude &quot;query&quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;带初始提示启动会话&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;claude &quot;explain this project&quot;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;claude -p &quot;query&quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;单次查询后退出（适合脚本）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;claude -p &quot;review this code&quot;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;*claude --dangerously-skip-permissions*&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;彻底疯狂模式，给予所有权限&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;个人建议装载插件、Skil&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;claude plugin install frontend-design@claude-plugins-official&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;前端设计&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;claude plugin install context7@claude-plugins-official&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;提供较新文档给AI，有效防止因训练数据落后的&quot;幻觉&quot;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;claude -p &quot;queryclaude plugin install csharp-lsp@claude-plugins-official&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;为 C# 项目提供丰富的代码智能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx claude-plugins install @anthropics/anthropic-agent-skills/document-skills&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;文档处理套件合集，包括Excel、Word、PowerPoint和PDF功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx claude-plugins install @anthropics/anthropic-agent-skills/example-skills&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;展示多种能力的示例技能集合，包括技能创建、MCP构建、视觉设计、算法艺术、内部沟通、网页测试、工件构建、Slack GIF和主题样式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx skills add [https://github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) --skill find-skills&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;这项技能帮助你发现并安装开放代理技能生态系统中的技能。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx skills add [https://github.com/vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) --skill vercel-react-best-practices&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;由Vercel维护的React和Next.js应用综合性能优化指南。包含8个类别的57条规则，按影响优先级排序，指导自动重构和代码生成。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx skills add [https://github.com/nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) --skill ui-ux-pro-max&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;设计很棒的 原仓库：https://github.com/nextlevelbuilder/ui-ux-pro-max-skill&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;npx skills add [https://github.com/coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) --skill seo-audit&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;SEO优化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;在UnityPackageManager ：&lt;strong&gt;&lt;code&gt;https://github.com/Besty0728/Unity-Skills.git?path=/SkillsForUnity&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Unity-Skills，本人开发 https://github.com/Besty0728/Unity-Skills&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;⚡ 交互式斜杠命令（Slash Commands）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/help&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;显示所有可用命令（含自定义命令）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/init&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;初始化项目，创建 &lt;a href=&quot;http://CLAUDE.md&quot;&gt;CLAUDE.md&lt;/a&gt; 记忆文件&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/memory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;编辑记忆文件 &lt;a href=&quot;http://CLAUDE.md&quot;&gt;CLAUDE.md&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/compact&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;压缩对话历史以节省上下文窗口（可加焦点：&lt;code&gt;/compact focus on tests&lt;/code&gt;）&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/context&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看当前上下文窗口使用情况&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/cost&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;显示当前会话的 Token 用量与费用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/stats&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看使用统计信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/model&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;切换 AI 模型（&lt;code&gt;/model opus&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/insights&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;ClaudeCode对你的评价&amp;amp;总结&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/status&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看当前会话状态（模型、设置等）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/config&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;打开设置交互界面&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/btw&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;不会污染上下文的一个并行小对话功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/permissions&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;管理权限设置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/mcp&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;配置 MCP 外部服务（&lt;code&gt;/mcp enable&lt;/code&gt; / &lt;code&gt;/mcp disable&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/hooks&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看 Hook 钩子配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/agents&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;管理子智能体（创建、编辑、列表、删除）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/resume&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;恢复已命名的会话&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/rename&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;给当前会话命名（&lt;code&gt;/rename feature-auth&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/fork&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;分支对话，探索不同方向而不丢失上下文&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/clear&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;清空对话历史，重新开始&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/rewind&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;回退到上一个检查点（撤销更改）&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/export&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;导出对话记录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/vim&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用 Vim 编辑模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/ide&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;连接到 IDE（VS Code / JetBrains）&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/sandbox&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;启用沙盒隔离模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;/simplify&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;三合一代码审查功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/output-style&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;设置输出风格（&lt;code&gt;Explanatory&lt;/code&gt; / &lt;code&gt;Learning&lt;/code&gt; / &lt;code&gt;Concise&lt;/code&gt;）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/add-dir&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;添加工作目录&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/doctor&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;检查安装状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/release-notes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;查看版本更新日志&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🔤 快捷前缀&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;前缀&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;示例&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;#&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;添加内容到持久化记忆（&lt;a href=&quot;http://CLAUDE.md&quot;&gt;CLAUDE.md&lt;/a&gt;）&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;# Always use TypeScript&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;@&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;引用文件或目录&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;@src/index.ts&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;!&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;直接执行 shell 命令&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;! git status&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;/&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;执行斜杠命令&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/help&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;发送任务到云端异步执行&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;amp; Build the API&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;⌨️ 键盘快捷键（Windows）&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;快捷键&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+C&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;取消当前操作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;退出会话&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+L&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;清屏（保留历史）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+O&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;切换详细输出模式（查看推理过程）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+R&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;搜索命令历史&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;Alt+V&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;从剪贴板粘贴图片&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Ctrl+B&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将当前任务转为后台运行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Esc Esc&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;撤销/回退上一次更改&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Tab&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;接受提示建议 / 切换扩展思考模式&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;Shift+Tab&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;循环切换权限模式&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Alt+P&lt;/code&gt; / &lt;code&gt;Option+P&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;输入时切换模型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;Ctrl+Enter&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;换行输入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;Ctrl+U&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;清空行输入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🧠 模型选择指南&lt;/h2&gt;
+&lt;p&gt;官方还支持以下格式快捷调用：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;模型别名&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;行为&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;default&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;推荐的模型设置，取决于你的账户类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;sonnet&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;使用最新的 Sonnet 模型（当前为 Sonnet 4.5）用于日常编码任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;opus&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;使用最新的 Opus 模型（当前为 Opus 4.6）用于复杂推理任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;haiku&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;使用快速高效的 Haiku 模型用于简单任务&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;sonnet[1m]&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;使用 Sonnet 和&lt;a href=&quot;https://platform.claude.com/docs/en/build-with-claude/context-windows#1m-token-context-window&quot;&gt;&lt;strong&gt;100 万 token 上下文窗口&lt;/strong&gt;&lt;/a&gt;用于长会话&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;opusplan&lt;/code&gt; 推荐&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;特殊模式，在计划模式中使用 &lt;strong&gt;&lt;code&gt;opus&lt;/code&gt;&lt;/strong&gt;，然后在执行时切换到 &lt;strong&gt;&lt;code&gt;sonnet&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;模型&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;输入 / 1M tokens&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;输出 / 1M tokens&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Haiku&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;简单任务、快速探索、子智能体&lt;/td&gt;
+&lt;td&gt;$1.00&lt;/td&gt;
+&lt;td&gt;$5.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Sonnet&lt;/strong&gt;（默认）&lt;/td&gt;
+&lt;td&gt;日常编程、功能开发、Bug 修复&lt;/td&gt;
+&lt;td&gt;$3.00&lt;/td&gt;
+&lt;td&gt;$15.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Opus&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;复杂推理、架构设计、安全分析&lt;/td&gt;
+&lt;td&gt;$5.00&lt;/td&gt;
+&lt;td&gt;$25.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&amp;lt;aside&amp;gt;
+💡&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;选择建议：&lt;/strong&gt; 日常用 Sonnet，子智能体探索用 Haiku（省 10-20 倍费用），只有架构设计或复杂调试才用 Opus。&lt;/p&gt;
+&lt;p&gt;&amp;lt;/aside&amp;gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;⚙️ 配置体系&lt;/h2&gt;
+&lt;h3&gt;配置文件层级（优先级从高到低）&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;企业级&lt;/strong&gt;：&lt;code&gt;/etc/claude-code/managed-settings.json&lt;/code&gt; — 全公司强制策略，用户不可覆盖&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CLI 标志&lt;/strong&gt;：命令行参数 — 当前会话&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;本地项目&lt;/strong&gt;：&lt;code&gt;.claude/settings.local.json&lt;/code&gt; — 个人，仅当前项目（应加入 .gitignore）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;共享项目&lt;/strong&gt;：&lt;code&gt;.claude/settings.json&lt;/code&gt; — 团队共享，提交到 Git&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户级&lt;/strong&gt;：&lt;code&gt;~/.claude/settings.json&lt;/code&gt; — 所有项目&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;个人开发直接使用3、5即可&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;a href=&quot;http://CLAUDE.md&quot;&gt;CLAUDE.md&lt;/a&gt; 记忆文件&lt;/h3&gt;
+&lt;p&gt;用于持久化项目上下文，让 Claude 每次会话都能了解你的项目：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;~/.claude/[CLAUDE.md](http://CLAUDE.md)&lt;/code&gt; — 全局，适用所有项目&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./[CLAUDE.md](http://CLAUDE.md)&lt;/code&gt; — 项目级，团队共享&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./[CLAUDE.local.md](http://CLAUDE.local.md)&lt;/code&gt; — 项目本地，个人笔记&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.claude/rules/&lt;/code&gt; — 分类规则目录（&lt;a href=&quot;http://testing.md&quot;&gt;testing.md&lt;/a&gt;、&lt;a href=&quot;http://security.md&quot;&gt;security.md&lt;/a&gt; 等）
+&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;我的用户级别Claude.md&amp;lt;/summary&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# 基础设置
+- 始终使用中文交流
+# 代码风格
+- 代码注释使用中文
+- 优先简洁实用，避免过度设计
+- 保持现有代码风格一致性
+# 技术栈偏好
+- Unity: C#，遵循Unity最佳实践
+- Web: TypeScript优先，Next.js/Astro
+- Python: 类型注解，async优先
+- 包管理: pnpm (Node) / uv (Python)
+# 工作习惯
+- 修改代码前先阅读理解现有逻辑
+- 提交信息使用中文，格式：类型: 简述
+- 遇到不确定的需求主动询问
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;我的用户级别Claude.md（进阶）&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# CLAUDE.md - 工作指导
+
+- 必须使用中文回复
+
+## 工作流程
+
+**简单任务**（单文件修改、小 bug、拼写修正）：直接执行
+
+**复杂任务**（多文件修改、架构设计、新功能）：
+1. 研究：Read 相关文件 + memory 目录，理解上下文，禁止编码
+2. 计划：EnterPlanMode 制定方案，用户确认后进入实施
+3. 实施：编码 → 运行测试验证
+4. 收尾：若产生了可复用的架构决策或调试经验，写入 memory 目录
+
+## 知识管理
+
+使用 Read/Write 操作 memory 目录（系统 prompt 会提供当前正确路径）：
+- 任务开始前：查阅 memory 目录已有知识
+- 发现可复用的架构决策、调试经验时：按主题存储（如 `patterns.md`、`debugging.md`）
+- 一次性、临时性的上下文不存储
+
+## 编码约束
+- 必须使用中文回复
+- 无明确编写指令时不主动编码
+- 无明确授权时不修改现有文件
+- 复杂修改前先分析影响范围
+- **禁止幻觉代码生成**：编码时遇到不确定的 API，必须按优先级执行：①读取项目依赖/源码确认实际可用的 API → ②通过对应文档工具查证（microsoft-docs MCP / Context7 / Grok `web_search`） → ③询问用户确认。三者至少执行一项，禁止凭记忆猜测生成代码
+
+## 工具优先级策略
+
+- 代码搜索：Grep → Glob → Agent(Explore)
+- Microsoft 技术文档：microsoft-docs MCP（microsoft_docs_search → microsoft_code_sample_search → microsoft_docs_fetch）
+- 开源库/框架文档：Context7 MCP（resolve-library-id → query-docs）
+- 网页搜索：见下方 Grok Search 规范
+- Skill：已安装的 Skill 各自有触发条件，匹配时主动调用即可
+- Plugin：`csharp-lsp` 为自动生效的 plugin，无需手动调用
+
+## Grok Search 使用规范
+
+内置 WebSearch/WebFetch 已禁用，所有网页搜索通过 **Grok Search MCP** 的工具完成：
+- 简单查询：直接调用 `web_search`，无需走规划链
+- 复杂/多步查询：`plan_intent` → `web_search` → 按需 `web_fetch` 补充完整内容
+- 结果整合：交叉验证 + **强制标注来源** `[标题](URL)` + 时间敏感信息注明日期
+- 错误恢复：连接失败 → `get_config_info` 检查 | 无结果 → 放宽查询条件重试
+- 核心约束：搜索结果必含来源引用，禁止无来源输出
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🔒 权限系统&lt;/h2&gt;
+&lt;h3&gt;权限模式（Shift+Tab切换）&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;模式&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;default&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;首次使用每个工具时提示确认&lt;/td&gt;
+&lt;td&gt;日常开发&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;acceptEdits&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;自动批准文件编辑，Bash 仍需确认&lt;/td&gt;
+&lt;td&gt;信任项目&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;plan&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;仅分析，禁止执行或编辑&lt;/td&gt;
+&lt;td&gt;代码审查&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bypassPermissions&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;跳过所有确认提示（谨慎使用）&lt;/td&gt;
+&lt;td&gt;CI/CD 自动化&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;工具权限规则示例&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;permissions&quot;: {
+    &quot;allow&quot;: [
+      &quot;Read&quot;,
+      &quot;Glob&quot;,
+      &quot;Grep&quot;,
+      &quot;Bash(npm run:*)&quot;,
+      &quot;Bash(git:*)&quot;,
+      &quot;Edit(src/**)&quot;
+    ],
+    &quot;deny&quot;: [
+      &quot;Read(.env*)&quot;,
+      &quot;Bash(rm -rf:*)&quot;,
+      &quot;Bash(sudo:*)&quot;
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🪝 Hooks 钩子系统&lt;/h2&gt;
+&lt;p&gt;Hooks 在特定时机 &lt;strong&gt;确定性&lt;/strong&gt; 执行 Shell 命令，不依赖模型判断，保证每次都会运行。&lt;/p&gt;
+&lt;h3&gt;可用事件&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;事件&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;中文说明&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;可阻断？&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PreToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;工具执行前（可验证、记录或阻止）&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PostToolUse&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;工具执行后（格式化、lint、构建等）&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UserPromptSubmit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;用户提交提示时（注入上下文）&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SessionStart&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;会话开始时（环境校验）&lt;/td&gt;
+&lt;td&gt;✅&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Stop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Claude 完成响应时（清理、记录）&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Notification&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;触发通知时（自定义提醒）&lt;/td&gt;
+&lt;td&gt;❌&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;示例：编辑后自动格式化&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [{
+      &quot;matcher&quot;: &quot;Edit|Write&quot;,
+      &quot;hooks&quot;: [{
+        &quot;type&quot;: &quot;command&quot;,
+        &quot;command&quot;: &quot;npx prettier --write \&quot;$FILE_PATH\&quot;&quot;
+      }]
+    }]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;示例：完成后通知&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;hooks&quot;: {
+    &quot;Stop&quot;: [
+      {
+        &quot;hooks&quot;: [
+          {
+            &quot;type&quot;: &quot;command&quot;,
+            &quot;command&quot;: &quot;powershell -c \&quot;[System.Media.SystemSounds]::Asterisk.Play()\&quot;&quot;
+          }
+        ]
+      }
+    ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🔌 MCP（模型上下文协议）&lt;/h2&gt;
+&lt;p&gt;MCP 让 Claude Code 连接外部工具、数据库、API 和服务。&lt;/p&gt;
+&lt;h3&gt;常用命令&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;# 添加 HTTP 类型服务
+claude mcp add --transport http github https://api.githubcopilot.com/mcp/
+
+# 添加 stdio 类型服务
+claude mcp add --transport stdio postgres -- npx -y @anthropic-ai/mcp-server-postgres
+
+# 查看已配置的服务
+claude mcp list
+
+# 移除服务
+claude mcp remove github
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🤝 子智能体（Subagents）&lt;/h2&gt;
+&lt;p&gt;子智能体是独立的 Claude 实例，拥有自己的上下文窗口，用于隔离复杂任务，避免主对话上下文膨胀。&lt;/p&gt;
+&lt;h3&gt;内置子智能体&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Explore&lt;/strong&gt;（Haiku）：只读探索代码库，超快、超便宜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;General&lt;/strong&gt;（Sonnet）：全功能读写，处理复杂任务&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plan&lt;/strong&gt;（Sonnet/Opus）：只读规划，制定实施方案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;自定义子智能体&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;.claude/agents/&lt;/code&gt; 目录创建 &lt;code&gt;.md&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: security-reviewer
+description: 安全代码审查专家
+tools: Read, Grep, Glob
+model: opus
+---
+你是一名高级安全工程师，负责审查代码中的漏洞...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;details&amp;gt;
+&amp;lt;summary&amp;gt;个人Subagents推荐 - Unity代码审查&amp;lt;/summary&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: unity-code-reviewer
+description: Unity 代码静态审查专家，审查 Unity C# 代码的性能、GC、正确性、线程安全、序列化陷阱和可维护性。只读审查，不修改文件。
+model: sonnet
+---
+
+You are a senior Unity code reviewer. You provide actionable review comments with Unity-specific rigor. You do NOT edit files—only analyze and report.
+
+## Review Scope (prioritized order)
+
+### 1. Correctness / Crashes (Blocker)
+- NullReferenceException risks: uninitialized fields, destroyed objects, missing components
+- Object lifetime: Destroy timing, scene transitions, DontDestroyOnLoad misuse
+- Domain reload: static state assumptions, [RuntimeInitializeOnLoadMethod] missing
+- Async misuse: Unity API called from background thread (must be main thread)
+- Race conditions: coroutine timing, async/await without proper synchronization
+
+### 2. Performance &amp;amp; GC (High)
+Per-frame allocation sources:
+- LINQ in Update/FixedUpdate/LateUpdate
+- foreach on non-array collections (List&amp;lt;T&amp;gt;.Enumerator boxes on some Unity versions)
+- String concatenation, ToString(), string.Format in hot paths
+- Boxing: value types to object, nullable comparisons
+- Closures capturing variables (creates delegate allocation)
+- params array allocation
+
+Hot path anti-patterns:
+- GetComponent&amp;lt;T&amp;gt;() every frame → cache in Awake/Start
+- Find*, FindObjectOfType → cache or use dependency injection
+- Camera.main → cache (it calls FindGameObjectWithTag internally)
+- Instantiate/Destroy churn → use object pooling
+- Physics queries without NonAlloc variants
+
+### 3. Architecture &amp;amp; Maintainability (Medium)
+- Tight coupling between systems
+- Hidden singletons, global state, unclear ownership
+- Overuse of SendMessage, BroadcastMessage, magic strings
+- Reflection in runtime code (slow, AOT issues on IL2CPP)
+- Testability: dependencies injectable, logic separable from MonoBehaviour
+
+### 4. Serialization &amp;amp; Asset Pitfalls (Medium)
+- [SerializeField] on non-serializable types (silently fails)
+- UnityEvent with missing targets after refactor
+- Script rename/namespace changes breaking prefab references
+- ScriptableObject mutation at runtime (shared state bug)
+- Prefab override hazards in YAML changes
+- GUID/meta file conflicts
+
+## Review Process
+1. If diff provided → focus on changed files first
+2. If no diff → infer likely areas from request keywords
+3. Use Glob/Grep to locate relevant code
+4. Cross-reference with Unity best practices
+
+## Output Format (strict)
+
+### Summary (3-6 bullets)
+Top risks and quick wins
+
+### Findings Table
+| Severity | File | Location | Issue | Recommendation | Evidence |
+|----------|------|----------|-------|----------------|----------|
+| Blocker/High/Medium/Low | path | class/method | what &amp;amp; why (Unity-specific) | concrete fix idea | snippet or grep match |
+
+### Follow-up Questions (max 5)
+Only if truly necessary for complete review
+
+## Limitations
+
+- **No code execution**: Cannot run tests, Play mode, or any runtime verification
+- **No profiling**: Cannot measure actual CPU/GPU/memory usage; performance findings are based on static pattern recognition
+- **No scene/prefab inspection**: Cannot open .unity or .prefab files visually; can only grep YAML text
+- **No asset validation**: Cannot verify texture formats, mesh stats, audio settings, or material properties visually
+- **Static analysis only**: All findings are based on reading source code; false positives are possible for runtime-dependent behavior
+
+## Collaboration
+
+- **Findings need fixing?** → Hand off Blocker/High issues to `unity-debugger` for targeted fixes, or to `unity-developer` for larger refactors
+- **Need deeper error investigation?** → Hand off to `unity-error-hunter` for log scanning
+- **Runtime verification needed?** → Tell the user to test in Unity Editor manually
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;/details&amp;gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🎨 Skills 技能系统&lt;/h2&gt;
+&lt;p&gt;与斜杠命令不同，Skills 是 &lt;strong&gt;模型自动调用&lt;/strong&gt; 的 — Claude 根据上下文自动识别并应用。&lt;/p&gt;
+&lt;h3&gt;创建 Skill&lt;/h3&gt;
+&lt;p&gt;在 &lt;code&gt;.claude/skills/my-skill/[SKILL.md](http://SKILL.md)&lt;/code&gt; 中定义：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+name: code-reviewer
+description: 代码审查专家，检查安全漏洞、性能问题和最佳实践
+allowed-tools: Read, Grep, Glob
+---
+# 代码审查专业知识
+审查时检查以下方面：
+- 输入验证与注入攻击
+- 认证与授权缺陷
+- 性能与内存问题
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;lt;aside&amp;gt;
+📝&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skill vs Command vs Subagent&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;斜杠命令&lt;/strong&gt;：你手动调用（&lt;code&gt;/deploy&lt;/code&gt;），控制执行时机&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skill&lt;/strong&gt;：Claude 自动识别场景并应用，无需手动触发&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;子智能体&lt;/strong&gt;：隔离上下文窗口，适合复杂独立任务
+&amp;lt;/aside&amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;📋 自定义斜杠命令&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;.claude/commands/&lt;/code&gt; 中创建 &lt;code&gt;.md&lt;/code&gt; 文件即可：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;---
+description: 修复 GitHub Issue
+allowed-tools: Read, Edit, Bash(git:*)
+argument-hint: [issue-number]
+---
+修复 GitHub Issue #$ARGUMENTS，遵循我们的编码规范。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用：&lt;code&gt;/fix-issue 123&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;💰 费用管理&lt;/h2&gt;
+&lt;h3&gt;查看费用&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; /cost
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;节省费用策略&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;子智能体探索用 &lt;strong&gt;Haiku&lt;/strong&gt;（比 Opus 便宜 10-20 倍）&lt;/li&gt;
+&lt;li&gt;开启 &lt;strong&gt;Prompt Caching&lt;/strong&gt;（默认开启）&lt;/li&gt;
+&lt;li&gt;设置 &lt;code&gt;--max-turns&lt;/code&gt; 防止失控对话&lt;/li&gt;
+&lt;li&gt;定期执行 &lt;code&gt;/compact&lt;/code&gt; 压缩上下文&lt;/li&gt;
+&lt;li&gt;设置 &lt;code&gt;--max-budget-usd&lt;/code&gt; 限制单次花费上限&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;hr /&gt;
+&lt;h2&gt;🏷️ 快速参考卡&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;╔══════════════════════════════════════════════════╗
+║          CLAUDE CODE 快速参考                     ║
+╠══════════════════════════════════════════════════╣
+║ 模型选择                                         ║
+║  haiku    → 简单任务、探索            ($1/$5/M)   ║
+║  sonnet   → 日常编程（默认）          ($3/$15/M)  ║
+║  opus     → 架构设计、复杂推理        ($5/$25/M)  ║
+╠══════════════════════════════════════════════════╣
+║ 必备命令                                         ║
+║  /compact   压缩上下文（50%时执行）               ║
+║  /cost      查看费用                              ║
+║  /model     切换模型                              ║
+║  /status    查看状态                              ║
+║  /init      初始化项目配置                        ║
+║  /mcp       管理外部集成                          ║
+╠══════════════════════════════════════════════════╣
+║ 前缀速查                                         ║
+║  # 消息     → 保存到记忆                          ║
+║  @ 路径     → 引用文件                            ║
+║  ! 命令     → 执行 Bash                           ║
+║  &amp;amp; 任务     → 云端异步执行                        ║
+╠══════════════════════════════════════════════════╣
+║ 决策规则                                         ║
+║  简单任务？       → Haiku                         ║
+║  复杂推理？       → Opus                          ║
+║  其他所有？       → Sonnet                        ║
+║  必须每次执行？   → Hook（非提示）                ║
+║  自动应用知识？   → Skill（非命令）               ║
+║  需要隔离上下文？ → 子智能体                      ║
+╚══════════════════════════════════════════════════╝
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;本笔记整理自 Claude Code 官方文档及社区指南，信息截至 2026年初。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</content:encoded></item><item><title>如何修改Windows用户名</title><link>https://wsunskyr.github.io/posts/userz-e/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/userz-e/</guid><description>Windows 中文用户名改英文名完整教程。通过启用 Administrator 超级用户账户，安全重命名用户文件夹并修改注册表 ProfileImagePath，解决软件兼容性问题，避免路径中文乱码。</description><pubDate>Fri, 19 Sep 2025 23:21:47 GMT</pubDate><content:encoded>&lt;h2&gt;1.首先你需要打开你的命令提示符（管理员权限），然后输入以下命令来开启超级用户去修改你的用户名：&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/ML.webp&quot; alt=&quot;打开管理员命令提示符&quot; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;net user administrator /active:yes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;2.然后按下Alt+F4，选择切换用户，切换到管理员账户（Administrator）&lt;/h2&gt;
+&lt;h2&gt;3.在任务管理器（Ctrl+Shift+Esc）关闭之前的用户所有进程&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/UserM.webp&quot; alt=&quot;任务管理器关闭用户进程&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;4.先重命名用户文件夹（C:\Users\原中文用户名）为（C:\Users\新英文用户名）&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://wsunskyr.github.io/images/Users.webp&quot; alt=&quot;用户文件夹重命名&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;如果存在仍有进程在运行问题，则开启你的资源监视器（Ctrl+Shift+Esc下的性能页面右上角的“打开资源监视器”）
+&lt;img src=&quot;https://wsunskyr.github.io/images/ZYGL.webp&quot; alt=&quot;资源监视器&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;然后在资源监视器的CPU页面的关联句柄搜索框中输入你的用户名，找到相关进程并结束它们&amp;lt;span style=&quot;color: red; font-weight: bold;&quot;&amp;gt;（需要重启则重启，后续仍选择超级管理员，误进入原来的用户导致错乱后果自负！！！）&amp;lt;/span&amp;gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/ZYJ.webp&quot; alt=&quot;资源监视器搜索关联句柄&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;5.然后打开注册表编辑器（Win+R，输入regedit回车），定位到以下路径：&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\S-1-5-21-1144158939-3632170427-3967875196-1001（一般是第三个，选中有你用户名的即可）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;修改&amp;lt;ins&amp;gt;&lt;strong&gt;ProfileImagePath&lt;/strong&gt;&amp;lt;/ins&amp;gt;
+&lt;img src=&quot;https://wsunskyr.github.io/images/eng11.webp&quot; alt=&quot;修改注册表ProfileImagePath&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;6.更改完成注册表后，按下Alt+F4，选择切换用户，切换到你的新英文用户名即可&lt;/h2&gt;
+&lt;p&gt;然后打开任务管理器（Ctrl+Shift+Esc）关闭管理员账户所有进程；再打开命令提示符（管理员权限），然后输入以下命令来关闭超级用户：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;net user administrator /active:no
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;7.配置文件看的是你C盘根目录下的Users文件夹下的用户名文件夹，并非是设置里的用户名&lt;/h2&gt;
+</content:encoded></item><item><title>Google AI Studio的汉化插件</title><link>https://wsunskyr.github.io/posts/ai-studio-zhcn/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/ai-studio-zhcn/</guid><description>Google AI Studio 中文汉化脚本，支持暴力猴和篡改猴插件。一键安装即可将 AI Studio 界面翻译为中文，解决 Edge 自动翻译导致网站报错的问题，提升 Gemini AI 使用体验。</description><pubDate>Mon, 15 Sep 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;p&amp;gt;首先确保你已经安装了暴力猴插件（Violentmonkey）/篡改猴插件（Tampermonkey）并且正常开启了它们的功能，如果没有安装请前往&amp;lt;a href=&quot;https://microsoftedge.microsoft.com/addons/detail/%E6%9A%B4%E5%8A%9B%E7%8C%B4/eeagobfjdenkkddmbclomhiblgggliao&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&amp;gt;暴力猴&amp;lt;/a&amp;gt;或&amp;lt;a href=&quot;https://microsoftedge.microsoft.com/addons/detail/%E7%AF%A1%E6%94%B9%E7%8C%B4/iikmkjmpaadaobahmlepeloendndfphd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&amp;gt;篡改猴&amp;lt;/a&amp;gt;下载安装。&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/monkey.webp&quot; alt=&quot;monkey&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/monkeyy.webp&quot; alt=&quot;monkey&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;安装完成后在暴力猴插件或篡改猴插件的仪表盘里点击“添加新脚本”，然后前往脚本安装地址&amp;lt;a href=&quot;https://greasyfork.org/zh-CN/scripts/549999-google-ai-studio-%E6%B1%89%E5%8C%96%E8%84%9A%E6%9C%AC&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&amp;gt;此处&amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;考虑到翻译脚本过于冗长，不利于博客文章流畅性，因此不在此处贴出脚本内容，请前往上述标签安装即可&amp;lt;/p&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/aistudio.webp&quot; alt=&quot;monkey&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;安装完成后刷新 AI Studio 页面即可看到大部分界面已经被汉化了。&amp;lt;/p&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>Unity配置MCP实现自动化</title><link>https://wsunskyr.github.io/posts/unity-mcp/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/unity-mcp/</guid><description>配置Unity MCP实现AI接管Unity开发自动化，包含VSCode、Rider、Visual Studio三种IDE的完整MCP配置示例，支持Github Copilot集成。</description><pubDate>Tue, 12 Aug 2025 08:45:29 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;p&amp;gt;这里只介绍三种配置示例，不会的去看视频；链接：&amp;lt;a href=&quot;https://www.bilibili.com/video/BV1gqtozaE4G/?vd_source=2eb5b7bd2c2ae3d60105b79832451ecc&quot;&amp;gt;利用GithubCopilot实现Unity自动化（MCP）_哔哩哔哩_bilibili&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;VSCode傻瓜式一键即可&amp;lt;/p&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;{&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;  &quot;servers&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;github&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;type&quot;:&quot;http&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;url&quot;:&quot;https://api.githubcopilot.com/mcp&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;gallery&quot;:true&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      },&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;unityMCP&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;          &quot;command&quot;: &quot;C:\Users\Betsy\AppData\Roaming\Python\Python313\Scripts\uv.exe&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;          &quot;args&quot;: [&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;              &quot;--directory&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;              &quot;C:\Users\Betsy\AppData\Local\Programs\UnityMCP\UnityMcpServer\src&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;              &quot;run&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;              &quot;server.py&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;          ],&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;          &quot;type&quot;: &quot;stdio&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;   },&amp;lt;br&amp;gt;   &quot;inputs&quot;:[]&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;}&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;Rider：（以上的GithubMCP可以选择不要,只要servers里包含我们的UnityMCP即可）&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;{&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;  &quot;servers&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    &quot;github&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;url&quot;: &quot;https://api.githubcopilot.com/mcp/&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;requestInit&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;headers&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;          &quot;Authorization&quot;: &quot;你的GithubPAT密钥&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    },&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    &quot;unityMCP&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;command&quot;: &quot;C:\Users\Betsy\AppData\Roaming\Python\Python313\Scripts\uv.exe&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;args&quot;: [&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;--directory&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;C:\Users\Betsy\AppData\Local\Programs\UnityMCP\UnityMcpServer\src&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;run&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;server.py&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      ],&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;type&quot;: &quot;stdio&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;  }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;}&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;Visual Studio：（这个是我最想喷的，官方给的mcp配置也是云里雾里的。。。目前最新版本是17.14，在你项目下面要建立一个&amp;lt;code&amp;gt;.mcp.json&amp;lt;/code&amp;gt;文件才可以，&amp;lt;span style=&quot;color: #e03e2d;&quot;&amp;gt;重启才能生效！！！&amp;lt;span style=&quot;color: #000000;&quot;&amp;gt;）&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;&amp;lt;span style=&quot;color: #e03e2d;&quot;&amp;gt;&amp;lt;span style=&quot;color: #000000;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1755016952760-375474964.webp&quot; alt=&quot;Visual Studio MCP配置文件位置&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;&amp;lt;span style=&quot;color: #e03e2d;&quot;&amp;gt;&amp;lt;span style=&quot;color: #000000;&quot;&amp;gt;VS配置直接复用VSCode的UnityMCP即可，GithubMCP要使用和Rider一样的PAT认证&amp;lt;/span&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;pre&amp;gt;&amp;lt;code&amp;gt;{&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;  &quot;servers&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    &quot;github&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;url&quot;: &quot;https://api.githubcopilot.com/mcp/&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;authorization_token&quot;: &quot;你的GithubPAT密钥&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    },&amp;lt;br&amp;gt;                 &amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;    &quot;unityMCP&quot;: {&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;command&quot;: &quot;C:\Users\Betsy\AppData\Roaming\Python\Python313\Scripts\uv.exe&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      &quot;args&quot;: [&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;--directory&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;C:\Users\Betsy\AppData\Local\Programs\UnityMCP\UnityMcpServer\src&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;run&quot;,&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;server.py&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        ],&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;        &quot;type&quot;: &quot;stdio&quot;&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;      }&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;   },&amp;lt;br&amp;gt;   &quot;inputs&quot;:[]&amp;lt;/code&amp;gt;&amp;lt;br&amp;gt;&amp;lt;code&amp;gt;}&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>如何获得Github教育优惠</title><link>https://wsunskyr.github.io/posts/github-1/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/github-1/</guid><description>详细教程：如何申请 GitHub 教育优惠获得两年免费福利。包括教育邮箱绑定、学信网认证材料准备、避免中文 OCR 识别失败的技巧，以及常见问题解决方案。</description><pubDate>Tue, 12 Aug 2025 08:35:00 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;p&amp;gt;前提：&amp;lt;/p&amp;gt;
+&amp;lt;ol&amp;gt;
+&amp;lt;li&amp;gt;具有一个教育邮箱（学校可能会给你，没有就去申请）&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;学信网的认证材料或录取通知书照片&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;认证时要获得你的ip位置，&amp;lt;span style=&quot;color: #e03e2d;&quot;&amp;gt;不要开启魔法！！！&amp;lt;/span&amp;gt;建议使用手机端认证（要求拍摄）&amp;lt;/li&amp;gt;
+&amp;lt;/ol&amp;gt;
+&amp;lt;p&amp;gt;我们进入你的Github页面，先绑定你的教育邮箱&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755015434244-210524120.webp&quot; alt=&quot;Github绑定教育邮箱&quot; width=&quot;2046&quot; height=&quot;441&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;然后前往教育福利页面，直接选择你的教育邮箱即可&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755015271686-94799935.webp&quot; alt=&quot;选择教育邮箱&quot; width=&quot;528&quot; height=&quot;783&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;然后填写你的信息&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755015645118-965159280.webp&quot; alt=&quot;填写个人信息&quot; width=&quot;776&quot; height=&quot;723&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;后续选择认证材料你选哪个根据你的材料来（学信网选择ID）&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755015717542-789384846.webp&quot; alt=&quot;选择认证材料类型&quot; width=&quot;675&quot; height=&quot;597&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span style=&quot;color: #e03e2d;&quot;&amp;gt;&amp;lt;em&amp;gt;&amp;lt;strong&amp;gt;注意！！！&amp;lt;/strong&amp;gt;&amp;lt;/em&amp;gt;&amp;lt;/span&amp;gt;不要直接提交你的材料，因为Github目前采用的是机器OCR（文字识别），对中文的成功率很低，建议使用英文版本的材料或者将你的材料用人为的方式手写成一个英文版本，不麻烦！！！（电脑记事本就可以）&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;以下是我学信网在线验证报告直接ai翻译得来的，实测成功&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755016079865-815771810.webp&quot; alt=&quot;学信网英文翻译版本示例&quot; width=&quot;1616&quot; height=&quot;947&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;然后在记事本里直接打出来&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755016256695-316685712.webp&quot; alt=&quot;记事本手写英文材料&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;下一步里如果触发了你距离学校远的话，直接选择始终远程教学就行，拍摄再拍一次上面的就行&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;再提一嘴，如果不放心可以选择更改你的github个人资料，与你文件中的名字一致即可，学校选择你的学校就行，按照上述操作大概率认证成功&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;img src=&quot;/images/image-1755016403916-475070115.webp&quot; alt=&quot;Github个人资料设置&quot;&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;注意，认证成功后是批准，72小时内下发你的权益（GithubCopilotPro等）；不过判断是否通过还是很快的&amp;lt;br&amp;gt;Github学生认证后去仔细查看Github学生包，里面有很多超值服务；保底都4个免费一年的域名以及各种软件的教育优惠（JetBrain、Notion等等）&amp;lt;br&amp;gt;早认证，早享受！！！&amp;lt;/p&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>Gemini-balance部署指南(非docker)</title><link>https://wsunskyr.github.io/posts/gemini-balance-docker/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/gemini-balance-docker/</guid><description>Gemini Balance非Docker部署完整指南，通过git源仓库形式启动项目，实现Gemini API的负载均衡和中转服务，附带网页版和Notion笔记教程。</description><pubDate>Sun, 10 Aug 2025 06:55:17 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;p&amp;gt;方便美观(我懒得重新编辑了)&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;网页版:&amp;lt;a href=&quot;https://geminiguide.ai0728.com.cn&quot;&amp;gt;Gemini Balance部署&amp;lt;/a&amp;gt;或&amp;lt;a href=&quot;https://micostar0728.notion.site/Gemini-Balance-24a5723cc6b580d9afd8c09a9f760a13&quot;&amp;gt;Notion笔记&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;Markdown文件:&amp;lt;a href=&quot;https://cloudrunmax.top/s/gXfx/GeminiGuide&quot;&amp;gt;Gemini-Balance部署Markdown&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>关于OpenWebUI外部访问的细节错误</title><link>https://wsunskyr.github.io/posts/openwebui/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/openwebui/</guid><description>解决OpenWebUI外部访问时Nginx配置的常见错误，包括WebSocket支持问题的完整排查方案，涵盖Nginx配置和域名服务商（EdgeOne/Cloudflare）设置。</description><pubDate>Sat, 02 Aug 2025 07:30:35 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;p&amp;gt;关于这个错误：&amp;lt;/p&amp;gt;
+&amp;lt;h2 class=&quot;gh-header-title flex-auto wb-break-word f1 mr-0&quot;&amp;gt;&amp;lt;span class=&quot;js-issue-title markdown-title&quot;&amp;gt;SyntaxError： Unexpected token &apos;d&apos;， “data： {”id“...JSON 无效&amp;lt;/span&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span class=&quot;js-issue-title markdown-title&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1754148558836-843256870.webp&quot; alt=&quot;JSON解析错误截图&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span class=&quot;js-issue-title markdown-title&quot;&amp;gt;这个是因为你的服务没有开启websocket导致的，开启的地方主要有两处：&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;ol&amp;gt;
+&amp;lt;li&amp;gt;&amp;lt;span class=&quot;js-issue-title markdown-title&quot;&amp;gt;nginx没有开启websocket支持（添加我标注的蓝色部分即可）&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt;&amp;lt;img src=&quot;/images/image-1754148814476-105309073.webp&quot; alt=&quot;Nginx WebSocket配置示例&quot; width=&quot;1321&quot; height=&quot;786&quot;&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li&amp;gt;你的域名服务商没有开启websocket支持（我个人踩过最深的坑）&amp;lt;br&amp;gt;以我使用的EdgeOne为例，EdgeOne默认不开启Websocket支持&amp;lt;br&amp;gt;&amp;lt;img src=&quot;/images/image-1754148546904-319018769.webp&quot; alt=&quot;EdgeOne WebSocket设置&quot;&amp;gt;&amp;lt;br&amp;gt;CloudFlare默认全部计划均开启且支持Websocket&amp;lt;br&amp;gt;&amp;lt;img src=&quot;/images/image-1754148603332-270641179.webp&quot; alt=&quot;CloudFlare WebSocket设置&quot;&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;/ol&amp;gt;&lt;/p&gt;
+</content:encoded></item><item><title>Unity调用OpenWeatherAPI查询天气</title><link>https://wsunskyr.github.io/posts/unity-openweatherapi/</link><guid isPermaLink="true">https://wsunskyr.github.io/posts/unity-openweatherapi/</guid><description>Unity调用OpenWeatherMap API实现实时天气查询功能，包含地理编码API、天气数据API的详细集成教程，带有完整的UI搭建和风向解析代码示例。</description><pubDate>Thu, 24 Jul 2025 01:03:07 GMT</pubDate><content:encoded>&lt;p&gt;&amp;lt;h2&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;1. 准备资源&amp;lt;/span&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;!-- [if !supportLists]--&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;A. &amp;lt;/span&amp;gt;&amp;lt;!--[endif]--&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;网站官方：&amp;lt;/span&amp;gt;&amp;lt;a href=&quot;https://openweathermap.org/&quot;&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;https://openweathermap.org/&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/a&amp;gt;   &amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;(&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;创建账户，获得免费&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API Key)&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;!-- [if !supportLists]--&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;B. &amp;lt;/span&amp;gt;&amp;lt;!--[endif]--&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;网站&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;文档调用示例：&amp;lt;/span&amp;gt;&amp;lt;a href=&quot;https://openweathermap.org/current&quot;&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span class=&quot;15&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;当前天气数据&amp;lt;/span&amp;gt; - OpenWeatherMap&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;!-- [if !supportLists]--&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;C. &amp;lt;/span&amp;gt;&amp;lt;!--[endif]--&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;网站地理编码&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;文档示例：&amp;lt;/span&amp;gt;&amp;lt;a href=&quot;https://openweathermap.org/api/geocoding-api&quot;&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span class=&quot;15&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;地理编码&amp;lt;/span&amp;gt; API - OpenWeatherMap&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;!-- [if !supportLists]--&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;D. &amp;lt;/span&amp;gt;&amp;lt;!--[endif]--&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;网站天气图标获取&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;(&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;采用&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;F12&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;检查台来获取源图片&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;)&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;：&amp;lt;/span&amp;gt;&amp;lt;a href=&quot;#How-to-get-icon-URL&quot;&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span class=&quot;15&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;天气状况&amp;lt;/span&amp;gt; - OpenWeatherMap&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;h2&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;2. 界面搭建&amp;lt;/span&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347351824-766386576.webp&quot; alt=&quot;天气查询UI界面搭建&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347365939-458403350.webp&quot; alt=&quot;天气查询UI层级结构&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;h2&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;3. 编写详细脚本&amp;lt;/span&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;A.创建按钮与输入框，检查事件&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;/&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;监听事件&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347438843-50591915.webp&quot; alt=&quot;按钮与输入框创建&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347452518-259337095.webp&quot; alt=&quot;事件监听代码&quot; width=&quot;468&quot; height=&quot;28&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347467202-834195448.webp&quot; alt=&quot;检查事件代码&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347479053-641590858.webp&quot; alt=&quot;监听事件绑定&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;B.&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;创建天气图标加载，采用字典，从持久化文件夹的一个文件夹中加载该图标集合&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347500126-612710467.webp&quot; alt=&quot;天气图标加载代码&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347511105-915289023.webp&quot; alt=&quot;图标字典初始化&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347523858-994668070.webp&quot; alt=&quot;持久化文件夹图标加载&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;C.&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;创建协程，进行网络查询请求&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;(Get Post)&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347553329-184317497.webp&quot; alt=&quot;协程网络请求代码&quot; width=&quot;808&quot; height=&quot;127&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347572391-956391829.webp&quot; alt=&quot;Get Post请求实现&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;D.此处要深度对照&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;文档实例的各项数据&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;例如：&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;geturl&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;是对应地理编码&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;，这样才可以实现输入名称来查询，而不是对照编码查询&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;Varurl&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;是对应当前天气数据的&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;API(&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;查询主力&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;)&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;UnityWebRequest&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;是&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;Unity&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;提供用于网络请求&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;Http(s)&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;的类，&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;SendWebRequest&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;是发送网络请求&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;GetJsonYN&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;是下面的一个统一处理方法&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347599242-521568104.webp&quot; alt=&quot;API文档对照与URL构建&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;E.更新文本&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;UI&amp;lt;/span&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;绝对的对照&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;Json&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;文件&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347644717-22499377.webp&quot; alt=&quot;更新文本UI代码&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;strong&amp;gt;&amp;lt;u&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347661716-939041786.webp&quot; alt=&quot;Json数据解析对照&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/u&amp;gt;&amp;lt;/strong&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;Cache&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;为上文创建的字典&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;mso-list: Ignore;&quot;&amp;gt;F. &amp;lt;/span&amp;gt;&amp;lt;!--[endif]--&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;风向选择解析&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;内部包含&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;16&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;方向&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;360/16=22.5&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;，按照索引排序选择对应风向&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;这是将角度转换为数组索引的核心计算。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;degrees + 11.25&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;: 将角度偏移半个区间 (22.5 / 2 = 11.25)。这样做是为了让每个风向区间的中心对齐。例如，0度（正北）应该落在 &quot;北风&quot; 区间。加上11.25后，0度就变成了11.25，除以22.5是0.5，取整后是0，对应 &quot;北风&quot;。22.5度（东北偏北和东北的边界）加上11.25是33.75，除以22.5是1.5，取整后是1，对应 &quot;东北偏北风&quot;。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;/ 22.5&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;: 将调整后的角度除以每个风向区间的宽度，得到一个浮点数索引。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;(int)(...)&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;: 将结果转换为整数，截断小数部分，得到初步的索引。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;% 16&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;: 取模16，确保索引值始终在 0 到 15 之间，以对应 &amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;directions&amp;lt;/span&amp;gt; &amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;数组的有效索引范围。例如，&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;360度（等同于0度）经过计算后也能正确映射到 &quot;北风&quot;。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;return directions[index];&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;: 使用计算得到的 &amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;index&amp;lt;/span&amp;gt; &amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;从&amp;lt;/span&amp;gt; &amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;directions&amp;lt;/span&amp;gt; &amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;数组中取出对应的风向字符串并返回。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347697499-969070799.webp&quot; alt=&quot;风向解析代码&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: Calibri;&quot;&amp;gt;G.&amp;lt;/span&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;挂载脚本&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p class=&quot;MsoNormal&quot;&amp;gt;&amp;lt;span style=&quot;font-family: 宋体;&quot;&amp;gt;&amp;lt;img src=&quot;/images/image-1753347718981-523560948.webp&quot; alt=&quot;挂载脚本到GameObject&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;a href=&quot;https://cloud.ai0728.com.cn/s/8LTv/OpenWeather&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&amp;gt;源脚本&amp;lt;/a&amp;gt;&lt;/p&gt;
+</content:encoded></item></channel></rss>
